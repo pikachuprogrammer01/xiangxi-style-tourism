@@ -1,4 +1,6 @@
 <script setup>
+import { Picture } from '@element-plus/icons-vue'
+
 defineProps({
   image: { type: String, default: '' },
   title: { type: String, default: '暂无数据' },

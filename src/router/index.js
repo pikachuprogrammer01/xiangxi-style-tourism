@@ -70,22 +70,18 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   document.title = to.meta.title || '湘西风情'
 
   const store = useUserStore()
 
   if (to.meta.requiresAuth && !store.isLoggedIn) {
-    next({ path: '/login', query: { redirect: to.fullPath } })
-    return
+    return { path: '/login', query: { redirect: to.fullPath } }
   }
 
   if (to.meta.guest && store.isLoggedIn) {
-    next({ path: '/' })
-    return
+    return { path: '/' }
   }
-
-  next()
 })
 
 export default router

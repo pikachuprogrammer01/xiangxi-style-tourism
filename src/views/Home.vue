@@ -1,18 +1,23 @@
-<script setup></script>
+<script setup>
+import HeroCarousel from '@/components/home/HeroCarousel.vue'
+import HotRecommend from '@/components/home/HotRecommend.vue'
+import CultureHighlights from '@/components/home/CultureHighlights.vue'
+import FoodPreview from '@/components/home/FoodPreview.vue'
+import { attractions } from '@/constants/attractions'
+import { foods } from '@/constants/foods'
+</script>
 
 <template>
-  <div class="home">
-    <h1>湘西风情 - 首页</h1>
-    <p>模块3实现</p>
+  <div class="home-page">
+    <HeroCarousel />
+    <HotRecommend :attractions="attractions" />
+    <CultureHighlights />
+    <FoodPreview :foods="foods" />
   </div>
 </template>
 
 <style scoped>
-.home {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.home-page {
+  margin-top: calc(-1 * var(--header-height));
 }
 </style>

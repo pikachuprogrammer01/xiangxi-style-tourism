@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { Message, Phone, Location, ChatDotSquare, Share, VideoCamera } from '@element-plus/icons-vue'
 </script>
 
 <template>
