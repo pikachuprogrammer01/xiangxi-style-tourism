@@ -1,0 +1,440 @@
+{
+  "project": "湘西风情旅游宣传网站",
+  "description": "图片资源数据文件，包含所有景点、美食、轮播图等图片的URL、描述和用途",
+  "source": "Pexels免费图库 (CC0协议，可商用)",
+  "total_images": 19,
+  "last_updated": "2026-04-29",
+  "categories": {
+    "carousel": {
+      "name": "首页轮播图",
+      "description": "用于首页全屏轮播展示，尺寸1920x1080",
+      "images": [
+        {
+          "id": "hero-1",
+          "filename": "hero-1-fenghuang-night.jpg",
+          "title": "凤凰古城夜景",
+          "description": "沱江两岸吊脚楼灯火璀璨，虹桥横跨江面，倒影如梦如幻。凤凰古城的夜晚是最具魅力的时刻，千年古镇在灯光映衬下宛如人间仙境。",
+          "location": "湖南省湘西土家族苗族自治州凤凰县",
+          "tags": [
+            "凤凰古城",
+            "夜景",
+            "沱江",
+            "吊脚楼",
+            "虹桥",
+            "灯光"
+          ],
+          "usage": "首页轮播图第1张 / 凤凰古城详情页封面",
+          "width": 1920,
+          "height": 1080,
+          "url": "https://images.pexels.com/photos/33665245/pexels-photo-33665245.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
+          "thumbnail": "https://images.pexels.com/photos/33665245/pexels-photo-33665245.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "hero-2",
+          "filename": "hero-2-fenghuang-aerial.jpg",
+          "title": "凤凰古城航拍全景",
+          "description": "从高空俯瞰凤凰古城全貌，沱江蜿蜒穿城而过，青瓦木楼鳞次栉比，远山如黛，晨雾缭绕，展现湘西水乡的独特韵味。",
+          "location": "湖南省湘西土家族苗族自治州凤凰县",
+          "tags": [
+            "凤凰古城",
+            "航拍",
+            "全景",
+            "沱江",
+            "晨雾",
+            "水乡"
+          ],
+          "usage": "首页轮播图第2张",
+          "width": 1920,
+          "height": 1080,
+          "url": "https://images.pexels.com/photos/30252160/pexels-photo-30252160.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
+          "thumbnail": "https://images.pexels.com/photos/30252160/pexels-photo-30252160.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "hero-3",
+          "filename": "hero-3-fenghuang-bridge.jpg",
+          "title": "凤凰古城虹桥黄昏",
+          "description": "夕阳西下的虹桥，古朴的石桥与两岸吊脚楼在金色余晖中交相辉映，沱江水静静流淌，承载着千年古城的历史记忆。",
+          "location": "湖南省湘西土家族苗族自治州凤凰县虹桥",
+          "tags": [
+            "凤凰古城",
+            "虹桥",
+            "黄昏",
+            "夕阳",
+            "吊脚楼",
+            "古建筑"
+          ],
+          "usage": "首页轮播图第3张 / 凤凰古城详情页",
+          "width": 1920,
+          "height": 1080,
+          "url": "https://images.pexels.com/photos/33672249/pexels-photo-33672249.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
+          "thumbnail": "https://images.pexels.com/photos/33672249/pexels-photo-33672249.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "hero-4",
+          "filename": "hero-4-zhangjiajie-misty.jpg",
+          "title": "张家界迷雾石柱仙境",
+          "description": "云雾缭绕中的张家界石柱群，奇峰异石若隐若现，宛如仙境。这里是电影《阿凡达》悬浮山的取景灵感来源地，被誉为'扩大的盆景，缩小的仙境'。",
+          "location": "湖南省张家界市武陵源区张家界国家森林公园",
+          "tags": [
+            "张家界",
+            "石柱",
+            "云海",
+            "仙境",
+            "阿凡达",
+            "国家森林公园"
+          ],
+          "usage": "首页轮播图第4张 / 张家界详情页封面",
+          "width": 1920,
+          "height": 1080,
+          "url": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
+          "thumbnail": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "hero-5",
+          "filename": "hero-5-zhangjiajie-pillars.jpg",
+          "title": "张家界壮观石柱群",
+          "description": "晴空下的张家界石英砂岩峰林，数千座石峰拔地而起，形态各异，气势磅礴。这里是世界自然遗产、世界地质公园，大自然的鬼斧神工令人叹为观止。",
+          "location": "湖南省张家界市武陵源区张家界国家森林公园",
+          "tags": [
+            "张家界",
+            "石柱群",
+            "峰林",
+            "自然遗产",
+            "地质公园",
+            "奇观"
+          ],
+          "usage": "首页轮播图第5张",
+          "width": 1920,
+          "height": 1080,
+          "url": "https://images.pexels.com/photos/30076140/pexels-photo-30076140.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2",
+          "thumbnail": "https://images.pexels.com/photos/30076140/pexels-photo-30076140.jpeg?auto=compress&cs=tinysrgb&w=400"
+        }
+      ]
+    },
+    "attractions": {
+      "name": "景点图片",
+      "description": "用于景点总览页和景点详情页展示",
+      "sub_categories": {
+        "fenghuang": {
+          "name": "凤凰古城",
+          "description": "国家历史文化名城，中国最美的小城之一",
+          "images": [
+            {
+              "id": "fh-1",
+              "filename": "fenghuang-river-building.jpg",
+              "title": "凤凰古城河边传统建筑",
+              "description": "沱江边的吊脚楼群，木质结构依水而建，飞檐翘角，古朴典雅。这些建筑见证了凤凰古城数百年的历史变迁，是湘西建筑艺术的活化石。",
+              "location": "凤凰古城沱江边",
+              "tags": [
+                "凤凰古城",
+                "吊脚楼",
+                "沱江",
+                "传统建筑",
+                "木质结构"
+              ],
+              "usage": "凤凰古城详情页-景点介绍",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=400"
+            },
+            {
+              "id": "fh-2",
+              "filename": "fenghuang-sunset.jpg",
+              "title": "凤凰古城日落河边",
+              "description": "夕阳下的沱江，金色的阳光洒在古老的吊脚楼上，江水泛着粼粼波光。游船缓缓驶过，渔夫撒网的剪影定格成一幅动人的画卷。",
+              "location": "凤凰古城沱江中游",
+              "tags": [
+                "凤凰古城",
+                "日落",
+                "沱江",
+                "游船",
+                "渔夫",
+                "金色"
+              ],
+              "usage": "凤凰古城详情页-游玩攻略",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=400"
+            },
+            {
+              "id": "fh-3",
+              "filename": "fenghuang-night-2.jpg",
+              "title": "凤凰古城夜景另一角度",
+              "description": "从南华门附近眺望古城夜景，万家灯火倒映在沱江之中，虹桥如彩虹横跨两岸。夜幕下的凤凰，静谧中透着繁华，古朴中蕴含现代气息。",
+              "location": "凤凰古城南华门观景台",
+              "tags": [
+                "凤凰古城",
+                "夜景",
+                "南华门",
+                "万家灯火",
+                "沱江倒影"
+              ],
+              "usage": "凤凰古城详情页-夜景展示",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/33665245/pexels-photo-33665245.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/33665245/pexels-photo-33665245.jpeg?auto=compress&cs=tinysrgb&w=400"
+            }
+          ]
+        },
+        "zhangjiajie": {
+          "name": "张家界国家森林公园",
+          "description": "中国第一个国家森林公园，世界自然遗产",
+          "images": [
+            {
+              "id": "zj-1",
+              "filename": "zhangjiajie-elevator.jpg",
+              "title": "张家界百龙电梯",
+              "description": "百龙天梯垂直高差335米，运行高度326米，被誉为'世界上最高、运行速度最快、载重量最大的电梯'。乘坐电梯可直达袁家界，俯瞰千峰竞秀的壮丽景观。",
+              "location": "张家界武陵源区百龙天梯",
+              "tags": [
+                "张家界",
+                "百龙电梯",
+                "天梯",
+                "世界纪录",
+                "袁家界"
+              ],
+              "usage": "张家界详情页-交通指南/游玩攻略",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/34683484/pexels-photo-34683484.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/34683484/pexels-photo-34683484.jpeg?auto=compress&cs=tinysrgb&w=400"
+            },
+            {
+              "id": "zj-2",
+              "filename": "zhangjiajie-pillars-day.jpg",
+              "title": "张家界石柱晴天景观",
+              "description": "晴日里的张家界石英砂岩峰林，蓝天白云下石柱群清晰可见。天子山、袁家界、杨家界等景区各具特色，每一处都是大自然的杰作。",
+              "location": "张家界国家森林公园天子山景区",
+              "tags": [
+                "张家界",
+                "天子山",
+                "石柱",
+                "晴天",
+                "峰林",
+                "蓝天"
+              ],
+              "usage": "张家界详情页-景点介绍",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/30076140/pexels-photo-30076140.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/30076140/pexels-photo-30076140.jpeg?auto=compress&cs=tinysrgb&w=400"
+            },
+            {
+              "id": "zj-3",
+              "filename": "zhangjiajie-mist.jpg",
+              "title": "张家界迷雾森林",
+              "description": "雨后初晴的张家界，云雾在山间缭绕，石柱若隐若现，仿佛置身仙境。这种'云海'景观是张家界最具代表性的自然奇观之一，吸引了无数摄影爱好者。",
+              "location": "张家界国家森林公园袁家界景区",
+              "tags": [
+                "张家界",
+                "云海",
+                "迷雾",
+                "雨后",
+                "仙境",
+                "摄影"
+              ],
+              "usage": "张家界详情页-最佳拍照点",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=400"
+            }
+          ]
+        },
+        "furong": {
+          "name": "芙蓉镇",
+          "description": "挂在瀑布上的千年古镇，因电影《芙蓉镇》而闻名",
+          "images": [
+            {
+              "id": "fr-1",
+              "filename": "furong-waterfall.jpg",
+              "title": "芙蓉镇瀑布景观",
+              "description": "芙蓉镇大瀑布高60米、宽40米，分两级从悬崖上飞泻而下，气势磅礴。古镇建筑沿瀑布两侧层层叠叠而建，形成'挂在瀑布上的千年古镇'的独特景观。",
+              "location": "湖南省湘西州永顺县芙蓉镇",
+              "tags": [
+                "芙蓉镇",
+                "大瀑布",
+                "悬崖",
+                "古镇",
+                "瀑布景观"
+              ],
+              "usage": "芙蓉镇详情页-封面/景点介绍",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/37300268/pexels-photo-37300268.jpeg?auto=compress&cs=tinysrgb&w=400"
+            },
+            {
+              "id": "fr-2",
+              "filename": "furong-town.jpg",
+              "title": "芙蓉镇古镇全景",
+              "description": "芙蓉镇原名王村，拥有两千多年历史。青石板街道蜿蜒曲折，土家吊脚楼错落有致，米豆腐的香气飘散在空气中，处处透着浓郁的湘西风情。",
+              "location": "湖南省湘西州永顺县芙蓉镇",
+              "tags": [
+                "芙蓉镇",
+                "王村",
+                "青石板",
+                "吊脚楼",
+                "米豆腐",
+                "土家族"
+              ],
+              "usage": "芙蓉镇详情页-古镇风貌",
+              "width": 1600,
+              "height": 1067,
+              "url": "https://images.pexels.com/photos/30252160/pexels-photo-30252160.jpeg?auto=compress&cs=tinysrgb&w=1600",
+              "thumbnail": "https://images.pexels.com/photos/30252160/pexels-photo-30252160.jpeg?auto=compress&cs=tinysrgb&w=400"
+            }
+          ]
+        }
+      }
+    },
+    "foods": {
+      "name": "美食图片",
+      "description": "用于美食推荐页和美食详情页展示",
+      "images": [
+        {
+          "id": "food-1",
+          "filename": "food-cover-chinese.jpg",
+          "title": "中式传统菜肴封面",
+          "description": "精选中式传统菜肴摆盘，色泽诱人，香气扑鼻。湘西美食以酸辣鲜香著称，融合了土家族、苗族等少数民族的独特烹饪技艺，每一道菜都承载着深厚的文化底蕴。",
+          "location": "湘西土家族苗族自治州",
+          "tags": [
+            "湘西美食",
+            "传统菜肴",
+            "中式料理",
+            "色香味",
+            "少数民族"
+          ],
+          "usage": "美食推荐页封面/美食详情页通用配图",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/21482824/pexels-photo-21482824.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/21482824/pexels-photo-21482824.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "food-2",
+          "filename": "food-spicy-fish.jpg",
+          "title": "香辣鱼（苗家酸汤鱼）",
+          "description": "苗家酸汤鱼是湘西最具代表性的美食之一。采用当地特有的红酸汤为底，配以新鲜河鱼，酸辣开胃，鱼肉鲜嫩。苗族有句俗语：'三天不吃酸，走路打蹿蹿'，足见酸汤在苗族饮食文化中的重要地位。",
+          "location": "湘西苗族聚居区",
+          "tags": [
+            "苗家酸汤鱼",
+            "红酸汤",
+            "河鱼",
+            "酸辣",
+            "苗族美食"
+          ],
+          "usage": "美食详情页-酸汤鱼",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/29305974/pexels-photo-29305974.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/29305974/pexels-photo-29305974.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "food-3",
+          "filename": "food-fish-soup.jpg",
+          "title": "传统辣鱼汤",
+          "description": "热气腾腾的辣鱼汤，汤色红亮，鱼肉雪白。湘西地处山区，气候潮湿，当地人喜食酸辣以祛湿驱寒。酸汤鱼不仅是一道美食，更是苗族人民智慧的结晶。",
+          "location": "湘西凤凰古城",
+          "tags": [
+            "酸汤鱼",
+            "辣鱼汤",
+            "红汤",
+            "祛湿",
+            "苗族智慧"
+          ],
+          "usage": "美食详情页-酸汤鱼制作步骤配图",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/32188266/pexels-photo-32188266.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/32188266/pexels-photo-32188266.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "food-4",
+          "filename": "food-grilled-fish.jpg",
+          "title": "香辣烤鱼（湘西腊肉/血粑鸭风格）",
+          "description": "外焦里嫩的香辣烤鱼，表面撒满辣椒和香料，色泽金黄诱人。湘西腊肉和血粑鸭同样以香辣著称，选用本地土鸭和优质猪肉，经过传统工艺腌制、烟熏，风味独特，回味无穷。",
+          "location": "湘西土家族聚居区",
+          "tags": [
+            "香辣烤鱼",
+            "湘西腊肉",
+            "血粑鸭",
+            "烟熏",
+            "传统工艺"
+          ],
+          "usage": "美食详情页-腊肉/血粑鸭配图",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/19106484/pexels-photo-19106484.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/19106484/pexels-photo-19106484.jpeg?auto=compress&cs=tinysrgb&w=400"
+        },
+        {
+          "id": "food-5",
+          "filename": "food-soup-bowl.jpg",
+          "title": "传统辣汤（美食推荐页）",
+          "description": "一碗热气腾腾的湘西传统汤品，汤色浓郁，配料丰富。湘西美食讲究原汁原味，善用本地特产如辣椒、酸菜、腊肉等，形成了独具特色的饮食文化体系。",
+          "location": "湘西各地",
+          "tags": [
+            "湘西汤品",
+            "传统美食",
+            "辣味",
+            "本地特产",
+            "饮食文化"
+          ],
+          "usage": "美食推荐页卡片配图",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/37171020/pexels-photo-37171020.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/37171020/pexels-photo-37171020.jpeg?auto=compress&cs=tinysrgb&w=400"
+        }
+      ]
+    },
+    "culture": {
+      "name": "文化民俗图片",
+      "description": "用于文化特色区和关于我们页面",
+      "images": [
+        {
+          "id": "culture-1",
+          "filename": "culture-miao.jpg",
+          "title": "湘西传统建筑文化",
+          "description": "湘西传统建筑以吊脚楼为代表，依山傍水而建，采用全木结构，不用一钉一铆，全靠榫卯连接。这种建筑形式既适应了山区地形，又具有防潮、防虫、通风等实用功能，是土家族、苗族人民智慧的结晶。",
+          "location": "湘西土家族苗族自治州",
+          "tags": [
+            "吊脚楼",
+            "传统建筑",
+            "榫卯结构",
+            "土家族",
+            "苗族",
+            "建筑智慧"
+          ],
+          "usage": "文化特色区/关于我们页面",
+          "width": 1600,
+          "height": 1067,
+          "url": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+          "thumbnail": "https://images.pexels.com/photos/34285491/pexels-photo-34285491.jpeg?auto=compress&cs=tinysrgb&w=400"
+        }
+      ]
+    }
+  },
+  "usage_guide": {
+    "project_structure": {
+      "carousel": "images/carousel/ - 首页轮播图（5张1920x1080）",
+      "attractions_fenghuang": "images/attractions/fenghuang/ - 凤凰古城景点图（3张）",
+      "attractions_zhangjiajie": "images/attractions/zhangjiajie/ - 张家界景点图（3张）",
+      "attractions_furong": "images/attractions/furong/ - 芙蓉镇景点图（2张）",
+      "foods": "images/foods/ - 美食图片（5张）",
+      "culture": "images/culture/ - 文化民俗图（1张）"
+    },
+    "naming_convention": "使用英文小写+连字符命名，如 fenghuang-night-view.jpg",
+    "optimization_tips": [
+      "使用TinyPNG或Squoosh压缩图片，减少文件体积",
+      "轮播图建议压缩至200-500KB",
+      "详情页图片建议压缩至100-300KB",
+      "统一转换为.jpg格式以保证兼容性"
+    ],
+    "copyright_notice": "所有图片均来自Pexels免费图库，采用CC0协议，可自由使用、修改、商用，无需署名"
+  }
+}
