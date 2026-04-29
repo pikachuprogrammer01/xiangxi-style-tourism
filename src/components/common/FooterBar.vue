@@ -54,7 +54,7 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
     </div>
 
     <div class="footer-bar__bottom">
-      <p>&copy; 2024 湘西风情 版权所有 | 毕业设计作品</p>
+      <p>&copy; 2026 湘西风情 秦欢 版权所有</p>
     </div>
   </footer>
 </template>

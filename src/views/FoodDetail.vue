@@ -87,6 +87,20 @@ const breadcrumbItems = computed(() => [
         </section>
       </div>
 
+      <!-- 美食图集 -->
+      <section v-if="food.images && food.images.length > 1" class="food-detail__section">
+        <h2 class="food-detail__section-title">美食图集</h2>
+        <div class="food-detail__gallery">
+          <img
+            v-for="(img, i) in food.images"
+            :key="i"
+            :src="img"
+            :alt="`${food.name} ${i + 1}`"
+            class="food-detail__gallery-img"
+          />
+        </div>
+      </section>
+
       <!-- 营养信息 -->
       <section class="food-detail__section">
         <h2 class="food-detail__section-title">营养信息</h2>
@@ -288,6 +302,25 @@ const breadcrumbItems = computed(() => [
   justify-content: center;
 }
 
+/* 美食图集 */
+.food-detail__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.food-detail__gallery-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-normal);
+}
+
+.food-detail__gallery-img:hover {
+  transform: scale(1.03);
+}
+
 /* 营养信息 */
 .food-detail__nutrition {
   display: flex;
@@ -371,6 +404,10 @@ const breadcrumbItems = computed(() => [
 
   .food-detail__nutrition {
     flex-wrap: wrap;
+  }
+
+  .food-detail__gallery {
+    grid-template-columns: 1fr;
   }
 }
 </style>

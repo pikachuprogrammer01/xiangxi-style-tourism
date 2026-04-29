@@ -1,27 +1,27 @@
 <script setup>
 const slides = [
   {
-    image: '/images/carousel/hero-1-fenghuang-night.jpg',
+    image: '/images/carousel/hero-01-fenghuang-night.jpg',
     title: '探秘凤凰古城',
     subtitle: '沱江灯火，千年一梦',
   },
   {
-    image: '/images/carousel/hero-2-fenghuang-aerial.jpg',
+    image: '/images/carousel/hero-02-fenghuang-aerial.jpg',
     title: '俯瞰湘西大地',
     subtitle: '山水画卷，尽收眼底',
   },
   {
-    image: '/images/carousel/hero-3-fenghuang-bridge.jpg',
+    image: '/images/carousel/hero-03-fenghuang-bridge.jpg',
     title: '虹桥遗梦',
     subtitle: '边城故事，湘西风情',
   },
   {
-    image: '/images/carousel/hero-4-zhangjiajie-misty.jpg',
+    image: '/images/carousel/hero-04-zhangjiajie-misty.jpg',
     title: '奇峰仙境',
     subtitle: '张家界 — 阿凡达的灵感之源',
   },
   {
-    image: '/images/carousel/hero-5-zhangjiajie-pillars.jpg',
+    image: '/images/carousel/hero-05-zhangjiajie-pillars.jpg',
     title: '千峰竞秀',
     subtitle: '世界自然遗产的壮丽奇观',
   },
