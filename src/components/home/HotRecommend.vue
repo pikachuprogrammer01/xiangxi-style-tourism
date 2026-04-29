@@ -1,10 +1,21 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { formatPrice, truncateText } from '@/utils/formatters'
+import { useUserStore } from '@/stores/user'
+import { Star, StarFilled } from '@element-plus/icons-vue'
 
-defineProps({
+const props = defineProps({
   attractions: { type: Array, required: true },
 })
+
+const userStore = useUserStore()
+
+function toggleFav(e, id) {
+  e.preventDefault()
+  const isFav = userStore.isFavorite('attractions', id)
+  userStore.toggleFavorite('attractions', id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 </script>
 
 <template>
@@ -20,6 +31,13 @@ defineProps({
           <RouterLink :to="`/attraction/${item.id}`" class="hot-recommend__card-link">
             <div class="hot-recommend__image-wrap">
               <img :src="item.coverImage" :alt="item.name" class="hot-recommend__image" />
+              <button
+                class="hot-recommend__fav"
+                :class="{ 'is-active': userStore.isFavorite('attractions', item.id) }"
+                @click="toggleFav($event, item.id)"
+              >
+                <el-icon :size="16"><StarFilled v-if="userStore.isFavorite('attractions', item.id)" /><Star v-else /></el-icon>
+              </button>
             </div>
             <div class="hot-recommend__content">
               <div class="hot-recommend__rating">
@@ -86,8 +104,32 @@ defineProps({
 }
 
 .hot-recommend__image-wrap {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 9;
+}
+
+.hot-recommend__fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  transition: all var(--transition-fast);
+}
+
+.hot-recommend__fav:hover,
+.hot-recommend__fav.is-active {
+  color: #e6a23c;
+  background: #fff;
 }
 
 .hot-recommend__image {

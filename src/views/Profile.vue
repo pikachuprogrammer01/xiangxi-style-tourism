@@ -32,7 +32,14 @@ function getHistoryItem(id, type) {
 }
 
 function clearHistory() {
-  userStore.clearHistory()
+  ElMessageBox.confirm('确定要清空所有浏览足迹吗？此操作不可恢复。', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    userStore.clearHistory()
+    ElMessage.success('已清空浏览足迹')
+  }).catch(() => {})
 }
 </script>
 

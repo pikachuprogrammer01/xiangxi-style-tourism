@@ -2,10 +2,21 @@
 import { RouterLink } from 'vue-router'
 import { formatPrice, truncateText } from '@/utils/formatters'
 import { CATEGORY_MAP } from '@/constants'
+import { useUserStore } from '@/stores/user'
+import { Star, StarFilled } from '@element-plus/icons-vue'
 
-defineProps({
+const props = defineProps({
   attraction: { type: Object, required: true },
 })
+
+const userStore = useUserStore()
+
+function toggleFav(e) {
+  e.preventDefault()
+  const isFav = userStore.isFavorite('attractions', props.attraction.id)
+  userStore.toggleFavorite('attractions', props.attraction.id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 </script>
 
 <template>
@@ -13,6 +24,13 @@ defineProps({
     <div class="attraction-card__image-wrap">
       <img :src="attraction.coverImage" :alt="attraction.name" class="attraction-card__image" />
       <span class="attraction-card__category">{{ CATEGORY_MAP[attraction.category] }}</span>
+      <button
+        class="attraction-card__fav"
+        :class="{ 'is-active': userStore.isFavorite('attractions', attraction.id) }"
+        @click="toggleFav"
+      >
+        <el-icon :size="16"><StarFilled v-if="userStore.isFavorite('attractions', attraction.id)" /><Star v-else /></el-icon>
+      </button>
     </div>
     <div class="attraction-card__body">
       <div class="attraction-card__rating">
@@ -81,6 +99,33 @@ defineProps({
   padding: 3px 10px;
   border-radius: 3px;
   letter-spacing: 1px;
+}
+
+.attraction-card__fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  transition: all var(--transition-fast);
+}
+
+.attraction-card__fav:hover,
+.attraction-card__fav.is-active {
+  color: #e6a23c;
+  background: #fff;
+}
+
+.attraction-card__fav.is-active {
+  color: #e6a23c;
 }
 
 .attraction-card__body {

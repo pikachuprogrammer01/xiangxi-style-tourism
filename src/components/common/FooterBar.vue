@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { Message, Phone, Location, ChatDotSquare, Share, VideoCamera } from '@element-plus/icons-vue'
+import { Message, Phone, Location } from '@element-plus/icons-vue'
 </script>
 
 <template>
@@ -45,15 +45,9 @@ import { Message, Phone, Location, ChatDotSquare, Share, VideoCamera } from '@el
         <div class="footer-bar__col">
           <h4 class="footer-bar__col-title">关注我们</h4>
           <div class="footer-bar__social">
-            <a href="#" class="footer-bar__social-icon" title="微信">
-              <el-icon :size="20"><ChatDotSquare /></el-icon>
-            </a>
-            <a href="#" class="footer-bar__social-icon" title="微博">
-              <el-icon :size="20"><Share /></el-icon>
-            </a>
-            <a href="#" class="footer-bar__social-icon" title="抖音">
-              <el-icon :size="20"><VideoCamera /></el-icon>
-            </a>
+            <span class="footer-bar__social-item">微信公众号</span>
+            <span class="footer-bar__social-item">新浪微博</span>
+            <span class="footer-bar__social-item">抖音短视频</span>
           </div>
         </div>
       </div>
@@ -146,25 +140,14 @@ import { Message, Phone, Location, ChatDotSquare, Share, VideoCamera } from '@el
 
 .footer-bar__social {
   display: flex;
-  gap: var(--spacing-md);
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
-.footer-bar__social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+.footer-bar__social-item {
+  font-size: 14px;
   color: #9ca3af;
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.footer-bar__social-icon:hover {
-  background: var(--color-primary);
-  color: #fff;
+  cursor: default;
 }
 
 .footer-bar__bottom {

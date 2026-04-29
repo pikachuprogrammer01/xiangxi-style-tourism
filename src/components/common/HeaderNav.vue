@@ -20,8 +20,15 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 function handleLogout() {
-  userStore.logout()
-  router.push('/')
+  ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    userStore.logout()
+    ElMessage.success('已退出登录')
+    router.push('/')
+  }).catch(() => {})
 }
 
 function closeMobile() {

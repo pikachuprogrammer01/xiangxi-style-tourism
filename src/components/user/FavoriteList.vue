@@ -22,7 +22,14 @@ const items = computed(() => {
 })
 
 function removeFav(id) {
-  userStore.toggleFavorite(props.type, id)
+  ElMessageBox.confirm('确定要取消收藏吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    userStore.toggleFavorite(props.type, id)
+    ElMessage.success('已取消收藏')
+  }).catch(() => {})
 }
 </script>
 

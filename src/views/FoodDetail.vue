@@ -2,13 +2,22 @@
 import BreadcrumbNav from '@/components/common/BreadcrumbNav.vue'
 import { useFoodStore } from '@/stores/food'
 import { FOOD_CATEGORY_MAP } from '@/constants'
-import { Bowl, Location, Food as FoodIcon } from '@element-plus/icons-vue'
+import { Bowl, Location, Food as FoodIcon, Star, StarFilled } from '@element-plus/icons-vue'
+import { useUserStore } from '@/stores/user'
 
 const route = useRoute()
 const router = useRouter()
 const store = useFoodStore()
+const userStore = useUserStore()
 
 const food = computed(() => store.getById(route.params.id))
+
+function toggleFav() {
+  if (!food.value) return
+  const isFav = userStore.isFavorite('foods', food.value.id)
+  userStore.toggleFavorite('foods', food.value.id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 
 if (!food.value) {
   router.replace('/404')
@@ -32,6 +41,14 @@ const breadcrumbItems = computed(() => [
           <div class="food-detail__hero-meta">
             <span class="food-detail__category-tag">{{ FOOD_CATEGORY_MAP[food.category] }}</span>
             <span class="food-detail__popularity">{{ food.popularity }}人推荐</span>
+            <button
+              class="food-detail__fav"
+              :class="{ 'is-active': userStore.isFavorite('foods', food.id) }"
+              @click="toggleFav"
+            >
+              <el-icon :size="18"><StarFilled v-if="userStore.isFavorite('foods', food.id)" /><Star v-else /></el-icon>
+              <span>{{ userStore.isFavorite('foods', food.id) ? '已收藏' : '收藏' }}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -161,6 +178,33 @@ const breadcrumbItems = computed(() => [
 .food-detail__popularity {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.75);
+}
+
+.food-detail__fav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.food-detail__fav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.food-detail__fav.is-active {
+  background: rgba(230, 162, 60, 0.3);
+  border-color: rgba(230, 162, 60, 0.5);
+  color: #f7d06e;
 }
 
 .food-detail__body {

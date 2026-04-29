@@ -1,9 +1,20 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import { Star, StarFilled } from '@element-plus/icons-vue'
 
-defineProps({
+const props = defineProps({
   foods: { type: Array, required: true },
 })
+
+const userStore = useUserStore()
+
+function toggleFav(e, id) {
+  e.preventDefault()
+  const isFav = userStore.isFavorite('foods', id)
+  userStore.toggleFavorite('foods', id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 </script>
 
 <template>
@@ -23,6 +34,13 @@ defineProps({
         >
           <div class="food-preview__image-wrap">
             <img :src="item.coverImage" :alt="item.name" class="food-preview__image" />
+            <button
+              class="food-preview__fav"
+              :class="{ 'is-active': userStore.isFavorite('foods', item.id) }"
+              @click="toggleFav($event, item.id)"
+            >
+              <el-icon :size="14"><StarFilled v-if="userStore.isFavorite('foods', item.id)" /><Star v-else /></el-icon>
+            </button>
           </div>
           <div class="food-preview__info">
             <h3 class="food-preview__name">{{ item.name }}</h3>
@@ -83,8 +101,32 @@ defineProps({
 }
 
 .food-preview__image-wrap {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
+}
+
+.food-preview__fav {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  transition: all var(--transition-fast);
+}
+
+.food-preview__fav:hover,
+.food-preview__fav.is-active {
+  color: #e6a23c;
+  background: #fff;
 }
 
 .food-preview__image {

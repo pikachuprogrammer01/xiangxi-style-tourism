@@ -2,10 +2,21 @@
 import { RouterLink } from 'vue-router'
 import { formatNumber } from '@/utils/formatters'
 import { FOOD_CATEGORY_MAP } from '@/constants'
+import { useUserStore } from '@/stores/user'
+import { Star, StarFilled } from '@element-plus/icons-vue'
 
-defineProps({
+const props = defineProps({
   food: { type: Object, required: true },
 })
+
+const userStore = useUserStore()
+
+function toggleFav(e) {
+  e.preventDefault()
+  const isFav = userStore.isFavorite('foods', props.food.id)
+  userStore.toggleFavorite('foods', props.food.id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 </script>
 
 <template>
@@ -18,7 +29,16 @@ defineProps({
       </div>
     </div>
     <div class="food-card__body">
-      <h3 class="food-card__name">{{ food.name }}</h3>
+      <div class="food-card__header">
+        <h3 class="food-card__name">{{ food.name }}</h3>
+        <button
+          class="food-card__fav"
+          :class="{ 'is-active': userStore.isFavorite('foods', food.id) }"
+          @click="toggleFav"
+        >
+          <el-icon :size="14"><StarFilled v-if="userStore.isFavorite('foods', food.id)" /><Star v-else /></el-icon>
+        </button>
+      </div>
       <div class="food-card__tags">
         <span v-for="tag in food.tags" :key="tag" class="food-card__tag">{{ tag }}</span>
       </div>
@@ -102,11 +122,38 @@ defineProps({
   padding: var(--spacing-md);
 }
 
+.food-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
 .food-card__name {
   font-size: 17px;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 8px;
+  margin: 0;
+}
+
+.food-card__fav {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  transition: all var(--transition-fast);
+}
+
+.food-card__fav:hover,
+.food-card__fav.is-active {
+  color: #e6a23c;
 }
 
 .food-card__tags {

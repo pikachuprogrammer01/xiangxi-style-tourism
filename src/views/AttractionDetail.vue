@@ -3,11 +3,20 @@ import BreadcrumbNav from '@/components/common/BreadcrumbNav.vue'
 import AttractionTabs from '@/components/attraction/AttractionTabs.vue'
 import { useAttractionStore } from '@/stores/attraction'
 import { formatPrice } from '@/utils/formatters'
-import { Clock, Sunrise, Coin, MapLocation } from '@element-plus/icons-vue'
+import { Clock, Sunrise, Coin, MapLocation, Star, StarFilled } from '@element-plus/icons-vue'
+import { useUserStore } from '@/stores/user'
 
 const route = useRoute()
 const router = useRouter()
 const store = useAttractionStore()
+const userStore = useUserStore()
+
+function toggleFav() {
+  if (!attraction.value) return
+  const isFav = userStore.isFavorite('attractions', attraction.value.id)
+  userStore.toggleFavorite('attractions', attraction.value.id)
+  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+}
 
 const attraction = computed(() => store.getById(route.params.id))
 
@@ -57,6 +66,20 @@ const quickInfo = computed(() => {
             <span class="attraction-detail__info-value">{{ info.value }}</span>
           </div>
         </div>
+      </div>
+
+      <div class="attraction-detail__action-bar">
+        <button
+          class="attraction-detail__fav"
+          :class="{ 'is-active': userStore.isFavorite('attractions', attraction.id) }"
+          @click="toggleFav"
+        >
+          <el-icon :size="20">
+            <StarFilled v-if="userStore.isFavorite('attractions', attraction.id)" />
+            <Star v-else />
+          </el-icon>
+          <span>{{ userStore.isFavorite('attractions', attraction.id) ? '已收藏此景点' : '收藏此景点' }}</span>
+        </button>
       </div>
 
       <div class="attraction-detail__overview">
@@ -125,6 +148,39 @@ const quickInfo = computed(() => {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+/* 收藏操作栏 */
+.attraction-detail__action-bar {
+  margin-bottom: var(--spacing-xl);
+}
+
+.attraction-detail__fav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-bg-white);
+  border: 1px solid #dcd3b2;
+  color: #922c21;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  transition: all var(--transition-normal);
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+.attraction-detail__fav:hover {
+  background: #fcfaf2;
+  border-color: #922c21;
+  box-shadow: 0 2px 8px rgba(146, 44, 33, 0.12);
+}
+
+.attraction-detail__fav.is-active {
+  background: rgba(146, 44, 33, 0.06);
+  border-color: #922c21;
+  color: #922c21;
 }
 
 .attraction-detail__tag {
