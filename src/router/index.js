@@ -53,6 +53,12 @@ const router = createRouter({
       meta: { title: '个人中心 - 湘西风情', requiresAuth: true },
     },
     {
+      path: '/culture/:id',
+      name: 'CultureDetail',
+      component: () => import('@/views/CultureDetail.vue'),
+      meta: { title: '湘西文化 - 湘西风情' },
+    },
+    {
       path: '/about',
       name: 'About',
       component: () => import('@/views/About.vue'),

@@ -3,18 +3,21 @@ import { Sunny, Brush, Present } from '@element-plus/icons-vue'
 
 const items = [
   {
+    id: 'folk-customs',
     icon: Sunny,
     title: '民俗文化',
     image: '/images/culture/culture-01-miao-costume.jpg',
     desc: '湘西是苗族、土家族等少数民族的聚居地，拥有丰富的民俗文化。苗族的银饰锻制技艺、土家族的摆手舞、苗族的四月八、土家族的社巴节等，构成了湘西独特的民俗文化画卷。',
   },
   {
+    id: 'handicrafts',
     icon: Brush,
     title: '传统手工艺',
     image: '/images/culture/culture-02-miao-women.jpg',
     desc: '苗族银饰、土家织锦（西兰卡普）、苗族刺绣、蜡染等传统手工艺，是湘西人民智慧的结晶。每一件手工艺品都承载着千年的文化记忆和匠人精神。',
   },
   {
+    id: 'festivals',
     icon: Present,
     title: '节庆活动',
     image: '/images/culture/culture-03-miao-headdress.jpg',
@@ -32,7 +35,7 @@ const items = [
       </div>
 
       <div class="culture-highlights__grid">
-        <div v-for="item in items" :key="item.title" class="culture-highlights__card">
+        <router-link v-for="item in items" :key="item.title" :to="`/culture/${item.id}`" class="culture-highlights__card">
           <div class="culture-highlights__image-wrap">
             <img :src="item.image" :alt="item.title" class="culture-highlights__image" />
             <div class="culture-highlights__icon">
@@ -43,7 +46,7 @@ const items = [
             <h3 class="culture-highlights__card-title">{{ item.title }}</h3>
             <p class="culture-highlights__desc">{{ item.desc }}</p>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </section>
@@ -78,6 +81,9 @@ const items = [
 }
 
 .culture-highlights__card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: var(--color-bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
