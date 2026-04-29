@@ -41,17 +41,45 @@ function closeMobile() {
       <RouterLink to="/" class="header-nav__logo" @click="closeMobile">湘西风情</RouterLink>
 
       <nav class="header-nav__links" :class="{ 'header-nav__links--open': mobileOpen }">
-        <RouterLink to="/" class="header-nav__link" active-class="header-nav__link--active" exact @click="closeMobile">首页</RouterLink>
-        <RouterLink to="/attractions" class="header-nav__link" active-class="header-nav__link--active" @click="closeMobile">景点总览</RouterLink>
-        <RouterLink to="/foods" class="header-nav__link" active-class="header-nav__link--active" @click="closeMobile">美食推荐</RouterLink>
-        <RouterLink to="/about" class="header-nav__link" active-class="header-nav__link--active" @click="closeMobile">关于我们</RouterLink>
+        <RouterLink
+          to="/"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          exact
+          @click="closeMobile"
+          >首页</RouterLink
+        >
+        <RouterLink
+          to="/attractions"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >景点总览</RouterLink
+        >
+        <RouterLink
+          to="/foods"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >美食推荐</RouterLink
+        >
+        <RouterLink
+          to="/about"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >关于我们</RouterLink
+        >
       </nav>
 
       <div class="header-nav__actions">
         <template v-if="userStore.isLoggedIn">
           <el-dropdown trigger="click">
             <span class="header-nav__user">
-              <el-avatar :size="32" :src="`https://api.dicebear.com/9.x/avataaars/svg?seed=${userStore.userInfo?.username || 'user'}`" />
+              <el-avatar
+                :size="32"
+                :src="`https://api.dicebear.com/9.x/avataaars/svg?seed=${userStore.userInfo?.username || 'user'}`"
+              />
               <span class="header-nav__username">{{ userStore.userInfo?.username }}</span>
             </span>
             <template #dropdown>
@@ -62,10 +90,18 @@ function closeMobile() {
             </template>
           </el-dropdown>
         </template>
-        <RouterLink v-else to="/login" class="header-nav__login-btn">登录</RouterLink>
+        <div class="header-nav-btn" v-else>
+          <RouterLink to="/login" class="header-nav__login-btn">登录</RouterLink>
+          <RouterLink to="/register" class="header-nav__register-btn">注册</RouterLink>
+        </div>
 
         <button class="header-nav__hamburger" @click="mobileOpen = !mobileOpen">
-          <span :class="{ 'header-nav__hamburger-line': true, 'header-nav__hamburger-line--open': mobileOpen }"></span>
+          <span
+            :class="{
+              'header-nav__hamburger-line': true,
+              'header-nav__hamburger-line--open': mobileOpen,
+            }"
+          ></span>
         </button>
       </div>
     </div>
@@ -82,7 +118,9 @@ function closeMobile() {
   right: 0;
   z-index: 1000;
   height: var(--header-height);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .header-nav--transparent {
@@ -194,7 +232,9 @@ function closeMobile() {
   white-space: nowrap;
 }
 
-.header-nav__login-btn {
+.header-nav__login-btn,
+.header-nav__register-btn {
+  margin-right: 6px;
   padding: 6px 20px;
   background: var(--color-primary);
   color: #fff;
@@ -204,7 +244,8 @@ function closeMobile() {
   transition: background var(--transition-fast);
 }
 
-.header-nav__login-btn:hover {
+.header-nav__login-btn:hover,
+.header-nav__register-btn:hover {
   background: var(--color-primary-dark);
 }
 
