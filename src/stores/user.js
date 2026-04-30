@@ -43,7 +43,7 @@ export const useUserStore = defineStore('user', () => {
     const user = users.find((u) => u.username === username && u.password === password)
     if (!user) return false
     isLoggedIn.value = true
-    userInfo.value = { id: user.id, username: user.username, email: user.email, phone: user.phone }
+    userInfo.value = { id: user.id, username: user.username, email: user.email, phone: user.phone, createdAt: user.createdAt }
     setItem('currentUser', userInfo.value)
     return true
   }
