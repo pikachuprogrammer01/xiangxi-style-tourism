@@ -104,11 +104,14 @@ export const useUserStore = defineStore('user', () => {
 
   init()
 
+  const demoAccount = { username: initUser.username, password: initUser.password }
+
   return {
     isLoggedIn,
     userInfo,
     favorites,
     history,
+    demoAccount,
     login,
     register,
     logout,

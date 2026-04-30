@@ -55,6 +55,11 @@ function handleLogin() {
         <p class="login-page__subtitle">探寻秘境，登录您的文化之旅</p>
       </div>
 
+      <div class="login-page__demo-hint">
+        <span class="demo-hint__label">演示账号</span>
+        <span class="demo-hint__cred">{{ userStore.demoAccount.username }} / {{ userStore.demoAccount.password }}</span>
+      </div>
+
       <el-form
         ref="loginFormRef"
         :model="loginForm"
@@ -95,9 +100,9 @@ function handleLogin() {
         <el-button
           type="primary"
           size="large"
+          native-type="submit"
           class="login-page__submit"
           :loading="loading"
-          @click="handleLogin"
         >
           开启旅程
         </el-button>
@@ -183,6 +188,34 @@ function handleLogin() {
   font-size: 14px;
   color: #666;
   font-style: italic;
+}
+
+.login-page__demo-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(26, 54, 93, 0.06);
+  border: 1px dashed rgba(26, 54, 93, 0.2);
+  border-radius: 4px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+}
+
+.demo-hint__label {
+  font-size: 12px;
+  color: #999;
+  background: rgba(26, 54, 93, 0.1);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.demo-hint__cred {
+  font-size: 14px;
+  color: #1a365d;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: monospace;
 }
 
 /* 输入框样式重写 */
