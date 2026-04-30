@@ -33,23 +33,23 @@ export function saveUsers (users) {
   setItem('users', users)
 }
 
-export function getFavorites () {
+export function getFavorites (userId) {
   return (
-    getItem('favorites') || {
+    getItem(`favorites_${userId}`) || {
       attractions: [],
       foods: [],
     }
   )
 }
 
-export function saveFavorites (favorites) {
-  setItem('favorites', favorites)
+export function saveFavorites (userId, favorites) {
+  setItem(`favorites_${userId}`, favorites)
 }
 
-export function getHistory () {
-  return getItem('history') || []
+export function getHistory (userId) {
+  return getItem(`history_${userId}`) || []
 }
 
-export function saveHistory (history) {
-  setItem('history', history)
+export function saveHistory (userId, history) {
+  setItem(`history_${userId}`, history)
 }

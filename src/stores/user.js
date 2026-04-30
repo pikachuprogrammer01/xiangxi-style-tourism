@@ -32,10 +32,10 @@ export const useUserStore = defineStore('user', () => {
     if (saved) {
       isLoggedIn.value = true
       userInfo.value = saved
+      favorites.value = getFavorites(saved.id)
+      history.value = getHistory(saved.id)
     }
     saveUsers([initUser])
-    favorites.value = getFavorites()
-    history.value = getHistory()
   }
 
   function login (username, password) {
@@ -45,6 +45,8 @@ export const useUserStore = defineStore('user', () => {
     isLoggedIn.value = true
     userInfo.value = { id: user.id, username: user.username, email: user.email, phone: user.phone, createdAt: user.createdAt }
     setItem('currentUser', userInfo.value)
+    favorites.value = getFavorites(user.id)
+    history.value = getHistory(user.id)
     return true
   }
 
@@ -67,6 +69,8 @@ export const useUserStore = defineStore('user', () => {
   function logout () {
     isLoggedIn.value = false
     userInfo.value = null
+    favorites.value = { attractions: [], foods: [] }
+    history.value = []
     removeItem('currentUser')
   }
 
@@ -78,7 +82,7 @@ export const useUserStore = defineStore('user', () => {
     } else {
       list.push(id)
     }
-    saveFavorites(favorites.value)
+    saveFavorites(userInfo.value.id, favorites.value)
   }
 
   function isFavorite (type, id) {
@@ -94,12 +98,12 @@ export const useUserStore = defineStore('user', () => {
     if (history.value.length > 50) {
       history.value = history.value.slice(0, 50)
     }
-    saveHistory(history.value)
+    saveHistory(userInfo.value.id, history.value)
   }
 
   function clearHistory () {
     history.value = []
-    saveHistory(history.value)
+    saveHistory(userInfo.value.id, history.value)
   }
 
   init()

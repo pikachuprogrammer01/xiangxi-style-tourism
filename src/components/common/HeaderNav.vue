@@ -30,7 +30,9 @@ function handleLogout() {
       ElMessage.success('已退出登录')
       router.push('/')
     })
-    .catch(() => {})
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 function closeMobile() {
