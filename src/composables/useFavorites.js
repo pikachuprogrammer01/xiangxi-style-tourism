@@ -2,13 +2,21 @@ import { useUserStore } from '@/stores/user'
 
 export function useFavorites() {
   const store = useUserStore()
+  const router = useRouter()
+  const route = useRoute()
 
+  /**
+   * Toggle favorite for a given type + id.
+   * Returns: null if not logged in (redirects to login), true if it was a favorite (now removed), false if it was not a favorite (now added).
+   */
   function toggle(type, id) {
     if (!store.isLoggedIn) {
-      return false
+      router.push({ path: '/login', query: { redirect: route.fullPath } })
+      return null
     }
+    const wasFav = store.isFavorite(type, id)
     store.toggleFavorite(type, id)
-    return true
+    return wasFav
   }
 
   function isFav(type, id) {

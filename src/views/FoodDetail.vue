@@ -3,20 +3,20 @@ import BreadcrumbNav from '@/components/common/BreadcrumbNav.vue'
 import { useFoodStore } from '@/stores/food'
 import { FOOD_CATEGORY_MAP } from '@/constants'
 import { Bowl, Location, Food as FoodIcon, Star, StarFilled } from '@element-plus/icons-vue'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 
 const route = useRoute()
 const router = useRouter()
 const store = useFoodStore()
-const userStore = useUserStore()
+const fav = useFavorites()
 
 const food = computed(() => store.getById(route.params.id))
 
 function toggleFav() {
   if (!food.value) return
-  const isFav = userStore.isFavorite('foods', food.value.id)
-  userStore.toggleFavorite('foods', food.value.id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('foods', food.value.id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 
 if (!food.value) {
@@ -43,11 +43,11 @@ const breadcrumbItems = computed(() => [
             <span class="food-detail__popularity">{{ food.popularity }}人推荐</span>
             <button
               class="food-detail__fav"
-              :class="{ 'is-active': userStore.isFavorite('foods', food.id) }"
+              :class="{ 'is-active': fav.isFav('foods', food.id) }"
               @click="toggleFav"
             >
-              <el-icon :size="18"><StarFilled v-if="userStore.isFavorite('foods', food.id)" /><Star v-else /></el-icon>
-              <span>{{ userStore.isFavorite('foods', food.id) ? '已收藏' : '收藏' }}</span>
+              <el-icon :size="18"><StarFilled v-if="fav.isFav('foods', food.id)" /><Star v-else /></el-icon>
+              <span>{{ fav.isFav('foods', food.id) ? '已收藏' : '收藏' }}</span>
             </button>
           </div>
         </div>

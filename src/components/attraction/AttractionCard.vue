@@ -2,20 +2,20 @@
 import { RouterLink } from 'vue-router'
 import { formatPrice, truncateText } from '@/utils/formatters'
 import { CATEGORY_MAP } from '@/constants'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 import { Star, StarFilled } from '@element-plus/icons-vue'
 
 const props = defineProps({
   attraction: { type: Object, required: true },
 })
 
-const userStore = useUserStore()
+const fav = useFavorites()
 
 function toggleFav(e) {
   e.preventDefault()
-  const isFav = userStore.isFavorite('attractions', props.attraction.id)
-  userStore.toggleFavorite('attractions', props.attraction.id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('attractions', props.attraction.id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 </script>
 
@@ -26,10 +26,10 @@ function toggleFav(e) {
       <span class="attraction-card__category">{{ CATEGORY_MAP[attraction.category] }}</span>
       <button
         class="attraction-card__fav"
-        :class="{ 'is-active': userStore.isFavorite('attractions', attraction.id) }"
+        :class="{ 'is-active': fav.isFav('attractions', attraction.id) }"
         @click="toggleFav"
       >
-        <el-icon :size="16"><StarFilled v-if="userStore.isFavorite('attractions', attraction.id)" /><Star v-else /></el-icon>
+        <el-icon :size="16"><StarFilled v-if="fav.isFav('attractions', attraction.id)" /><Star v-else /></el-icon>
       </button>
     </div>
     <div class="attraction-card__body">

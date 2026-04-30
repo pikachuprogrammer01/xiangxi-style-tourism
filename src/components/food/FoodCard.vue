@@ -2,20 +2,20 @@
 import { RouterLink } from 'vue-router'
 import { formatNumber } from '@/utils/formatters'
 import { FOOD_CATEGORY_MAP } from '@/constants'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 import { Star, StarFilled } from '@element-plus/icons-vue'
 
 const props = defineProps({
   food: { type: Object, required: true },
 })
 
-const userStore = useUserStore()
+const fav = useFavorites()
 
 function toggleFav(e) {
   e.preventDefault()
-  const isFav = userStore.isFavorite('foods', props.food.id)
-  userStore.toggleFavorite('foods', props.food.id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('foods', props.food.id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 </script>
 
@@ -33,10 +33,10 @@ function toggleFav(e) {
         <h3 class="food-card__name">{{ food.name }}</h3>
         <button
           class="food-card__fav"
-          :class="{ 'is-active': userStore.isFavorite('foods', food.id) }"
+          :class="{ 'is-active': fav.isFav('foods', food.id) }"
           @click="toggleFav"
         >
-          <el-icon :size="14"><StarFilled v-if="userStore.isFavorite('foods', food.id)" /><Star v-else /></el-icon>
+          <el-icon :size="14"><StarFilled v-if="fav.isFav('foods', food.id)" /><Star v-else /></el-icon>
         </button>
       </div>
       <div class="food-card__tags">

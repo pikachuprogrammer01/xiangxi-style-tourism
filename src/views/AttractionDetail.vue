@@ -4,18 +4,18 @@ import AttractionTabs from '@/components/attraction/AttractionTabs.vue'
 import { useAttractionStore } from '@/stores/attraction'
 import { formatPrice } from '@/utils/formatters'
 import { Clock, Sunrise, Coin, MapLocation, Star, StarFilled } from '@element-plus/icons-vue'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 
 const route = useRoute()
 const router = useRouter()
 const store = useAttractionStore()
-const userStore = useUserStore()
+const fav = useFavorites()
 
 function toggleFav() {
   if (!attraction.value) return
-  const isFav = userStore.isFavorite('attractions', attraction.value.id)
-  userStore.toggleFavorite('attractions', attraction.value.id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('attractions', attraction.value.id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 
 const attraction = computed(() => store.getById(route.params.id))
@@ -71,14 +71,14 @@ const quickInfo = computed(() => {
       <div class="attraction-detail__action-bar">
         <button
           class="attraction-detail__fav"
-          :class="{ 'is-active': userStore.isFavorite('attractions', attraction.id) }"
+          :class="{ 'is-active': fav.isFav('attractions', attraction.id) }"
           @click="toggleFav"
         >
           <el-icon :size="20">
-            <StarFilled v-if="userStore.isFavorite('attractions', attraction.id)" />
+            <StarFilled v-if="fav.isFav('attractions', attraction.id)" />
             <Star v-else />
           </el-icon>
-          <span>{{ userStore.isFavorite('attractions', attraction.id) ? '已收藏此景点' : '收藏此景点' }}</span>
+          <span>{{ fav.isFav('attractions', attraction.id) ? '已收藏此景点' : '收藏此景点' }}</span>
         </button>
       </div>
 

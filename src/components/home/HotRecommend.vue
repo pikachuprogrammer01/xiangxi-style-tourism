@@ -1,20 +1,20 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { formatPrice, truncateText } from '@/utils/formatters'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 import { Star, StarFilled } from '@element-plus/icons-vue'
 
 const props = defineProps({
   attractions: { type: Array, required: true },
 })
 
-const userStore = useUserStore()
+const fav = useFavorites()
 
 function toggleFav(e, id) {
   e.preventDefault()
-  const isFav = userStore.isFavorite('attractions', id)
-  userStore.toggleFavorite('attractions', id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('attractions', id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 </script>
 
@@ -33,10 +33,10 @@ function toggleFav(e, id) {
               <img :src="item.coverImage" :alt="item.name" class="hot-recommend__image" />
               <button
                 class="hot-recommend__fav"
-                :class="{ 'is-active': userStore.isFavorite('attractions', item.id) }"
+                :class="{ 'is-active': fav.isFav('attractions', item.id) }"
                 @click="toggleFav($event, item.id)"
               >
-                <el-icon :size="16"><StarFilled v-if="userStore.isFavorite('attractions', item.id)" /><Star v-else /></el-icon>
+                <el-icon :size="16"><StarFilled v-if="fav.isFav('attractions', item.id)" /><Star v-else /></el-icon>
               </button>
             </div>
             <div class="hot-recommend__content">

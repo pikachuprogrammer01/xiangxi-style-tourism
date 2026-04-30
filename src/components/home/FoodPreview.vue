@@ -1,19 +1,19 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import { useFavorites } from '@/composables/useFavorites'
 import { Star, StarFilled } from '@element-plus/icons-vue'
 
 const props = defineProps({
   foods: { type: Array, required: true },
 })
 
-const userStore = useUserStore()
+const fav = useFavorites()
 
 function toggleFav(e, id) {
   e.preventDefault()
-  const isFav = userStore.isFavorite('foods', id)
-  userStore.toggleFavorite('foods', id)
-  ElMessage.success(isFav ? '已取消收藏' : '已收藏')
+  const wasFav = fav.toggle('foods', id)
+  if (wasFav === null) return
+  ElMessage.success(wasFav ? '已取消收藏' : '已收藏')
 }
 </script>
 
@@ -36,10 +36,10 @@ function toggleFav(e, id) {
             <img :src="item.coverImage" :alt="item.name" class="food-preview__image" />
             <button
               class="food-preview__fav"
-              :class="{ 'is-active': userStore.isFavorite('foods', item.id) }"
+              :class="{ 'is-active': fav.isFav('foods', item.id) }"
               @click="toggleFav($event, item.id)"
             >
-              <el-icon :size="14"><StarFilled v-if="userStore.isFavorite('foods', item.id)" /><Star v-else /></el-icon>
+              <el-icon :size="14"><StarFilled v-if="fav.isFav('foods', item.id)" /><Star v-else /></el-icon>
             </button>
           </div>
           <div class="food-preview__info">
