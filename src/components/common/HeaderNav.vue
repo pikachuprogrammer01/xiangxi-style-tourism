@@ -24,11 +24,13 @@ function handleLogout() {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
-  }).then(() => {
-    userStore.logout()
-    ElMessage.success('已退出登录')
-    router.push('/')
-  }).catch(() => {})
+  })
+    .then(() => {
+      userStore.logout()
+      ElMessage.success('已退出登录')
+      router.push('/')
+    })
+    .catch(() => {})
 }
 
 function closeMobile() {
@@ -45,7 +47,9 @@ function closeMobile() {
     }"
   >
     <div class="header-nav__inner">
-      <RouterLink to="/" class="header-nav__logo" @click="closeMobile">湘西风情</RouterLink>
+      <RouterLink to="/" class="header-nav__logo" @click="closeMobile"
+        ><img src="/favicon.ico" alt="LOGO" class="logo-img"
+      /></RouterLink>
 
       <nav class="header-nav__links" :class="{ 'header-nav__links--open': mobileOpen }">
         <RouterLink
@@ -148,6 +152,10 @@ function closeMobile() {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.logo-img {
+  height: 64px;
 }
 
 .header-nav__logo {
