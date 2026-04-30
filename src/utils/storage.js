@@ -1,10 +1,10 @@
 const STORAGE_PREFIX = 'xxfy_'
 
-function key(name) {
+function key (name) {
   return STORAGE_PREFIX + name
 }
 
-export function getItem(name) {
+export function getItem (name) {
   try {
     const raw = localStorage.getItem(key(name))
     return raw ? JSON.parse(raw) : null
@@ -13,27 +13,27 @@ export function getItem(name) {
   }
 }
 
-export function setItem(name, value) {
+export function setItem (name, value) {
   try {
     localStorage.setItem(key(name), JSON.stringify(value))
   } catch {
-    // localStorage full or unavailable
+    // 本地存储已满或不可用
   }
 }
 
-export function removeItem(name) {
+export function removeItem (name) {
   localStorage.removeItem(key(name))
 }
 
-export function getUsers() {
+export function getUsers () {
   return getItem('users') || []
 }
 
-export function saveUsers(users) {
+export function saveUsers (users) {
   setItem('users', users)
 }
 
-export function getFavorites() {
+export function getFavorites () {
   return (
     getItem('favorites') || {
       attractions: [],
@@ -42,14 +42,14 @@ export function getFavorites() {
   )
 }
 
-export function saveFavorites(favorites) {
+export function saveFavorites (favorites) {
   setItem('favorites', favorites)
 }
 
-export function getHistory() {
+export function getHistory () {
   return getItem('history') || []
 }
 
-export function saveHistory(history) {
+export function saveHistory (history) {
   setItem('history', history)
 }
