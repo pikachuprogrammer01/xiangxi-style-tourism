@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="user-profile-card">
+  <div v-if="userInfo" class="user-profile-card">
     <div class="user-profile-card__avatar-wrap">
       <img
         :src="`https://api.dicebear.com/9.x/avataaars/svg?seed=${userInfo.username}`"

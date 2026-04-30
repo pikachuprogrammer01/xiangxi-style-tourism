@@ -52,7 +52,7 @@ function clearHistory() {
       </div>
     </div>
 
-    <div class="container profile-page__body">
+    <div v-if="userStore.userInfo" class="container profile-page__body">
       <UserProfileCard :user-info="userStore.userInfo" />
 
       <UserStats :stats="stats" />
