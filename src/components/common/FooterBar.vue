@@ -1,5 +1,4 @@
 <script setup>
-import { RouterLink } from 'vue-router'
 import { Message, Phone, Location } from '@element-plus/icons-vue'
 </script>
 
@@ -14,20 +13,6 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
           </p>
         </div>
 
-        <div class="footer-bar__col">
-          <h4 class="footer-bar__col-title">快速导航</h4>
-          <ul class="footer-bar__nav-list">
-            <li><RouterLink to="/attractions" class="footer-bar__link">景点总览</RouterLink></li>
-            <li><RouterLink to="/foods" class="footer-bar__link">美食推荐</RouterLink></li>
-            <li><RouterLink to="/cultures" class="footer-bar__link">湘西文化</RouterLink></li>
-            <li><RouterLink to="/guide" class="footer-bar__link">旅游攻略</RouterLink></li>
-            <li><RouterLink to="/heritage" class="footer-bar__link">非遗展示</RouterLink></li>
-            <li><RouterLink to="/gallery" class="footer-bar__link">摄影画廊</RouterLink></li>
-            <li><RouterLink to="/guestbook" class="footer-bar__link">留言板</RouterLink></li>
-            <li><RouterLink to="/about" class="footer-bar__link">关于我们</RouterLink></li>
-            <li><RouterLink to="/profile" class="footer-bar__link">个人中心</RouterLink></li>
-          </ul>
-        </div>
 
         <div class="footer-bar__col">
           <h4 class="footer-bar__col-title">联系方式</h4>
@@ -80,7 +65,7 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
   display: grid;
-  grid-template-columns: 2fr 1fr 1.2fr 1fr;
+  grid-template-columns: 2fr 1.2fr 1fr;
   gap: var(--spacing-xl);
 }
 

@@ -84,6 +84,34 @@ function closeMobile() {
           >湘西文化</RouterLink
         >
         <RouterLink
+          to="/guide"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >旅游攻略</RouterLink
+        >
+        <RouterLink
+          to="/heritage"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >非遗展示</RouterLink
+        >
+        <RouterLink
+          to="/gallery"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >摄影画廊</RouterLink
+        >
+        <RouterLink
+          to="/guestbook"
+          class="header-nav__link"
+          active-class="header-nav__link--active"
+          @click="closeMobile"
+          >留言板</RouterLink
+        >
+        <RouterLink
           to="/about"
           class="header-nav__link"
           active-class="header-nav__link--active"
