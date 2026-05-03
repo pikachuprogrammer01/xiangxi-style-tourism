@@ -77,13 +77,6 @@ function closeMobile() {
           >美食推荐</RouterLink
         >
         <RouterLink
-          to="/cultures"
-          class="header-nav__link"
-          active-class="header-nav__link--active"
-          @click="closeMobile"
-          >湘西文化</RouterLink
-        >
-        <RouterLink
           to="/guide"
           class="header-nav__link"
           active-class="header-nav__link--active"

@@ -43,7 +43,12 @@ const categories = computed(() =>
       </div>
 
       <div class="heritage__grid">
-        <div v-for="item in filteredItems" :key="item.id" class="heritage__card">
+        <RouterLink
+          v-for="item in filteredItems"
+          :key="item.id"
+          :to="`/heritage/${item.id}`"
+          class="heritage__card"
+        >
           <div class="heritage__card-img-wrap">
             <img :src="item.image" :alt="item.name" class="heritage__card-img" />
           </div>
@@ -54,7 +59,7 @@ const categories = computed(() =>
             </div>
             <p class="heritage__card-summary">{{ item.summary }}</p>
           </div>
-        </div>
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -131,11 +136,15 @@ const categories = computed(() =>
 }
 
 .heritage__card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: #fff;
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  cursor: pointer;
 }
 
 .heritage__card:hover {

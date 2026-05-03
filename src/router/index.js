@@ -53,18 +53,6 @@ const router = createRouter({
       meta: { title: '个人中心 - 湘西风情', requiresAuth: true },
     },
     {
-      path: '/cultures',
-      name: 'CultureIndex',
-      component: () => import('@/views/CultureIndex.vue'),
-      meta: { title: '湘西文化 - 湘西风情' },
-    },
-    {
-      path: '/culture/:id',
-      name: 'CultureDetail',
-      component: () => import('@/views/CultureDetail.vue'),
-      meta: { title: '湘西文化 - 湘西风情' },
-    },
-    {
       path: '/guide',
       name: 'TravelGuide',
       component: () => import('@/views/TravelGuide.vue'),
@@ -75,6 +63,12 @@ const router = createRouter({
       name: 'Heritage',
       component: () => import('@/views/Heritage.vue'),
       meta: { title: '非遗展示 - 湘西风情' },
+    },
+    {
+      path: '/heritage/:id',
+      name: 'HeritageDetail',
+      component: () => import('@/views/HeritageDetail.vue'),
+      meta: { title: '非遗详情 - 湘西风情' },
     },
     {
       path: '/guestbook',
