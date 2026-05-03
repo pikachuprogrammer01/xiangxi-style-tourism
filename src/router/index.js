@@ -53,10 +53,40 @@ const router = createRouter({
       meta: { title: '个人中心 - 湘西风情', requiresAuth: true },
     },
     {
+      path: '/cultures',
+      name: 'CultureIndex',
+      component: () => import('@/views/CultureIndex.vue'),
+      meta: { title: '湘西文化 - 湘西风情' },
+    },
+    {
       path: '/culture/:id',
       name: 'CultureDetail',
       component: () => import('@/views/CultureDetail.vue'),
       meta: { title: '湘西文化 - 湘西风情' },
+    },
+    {
+      path: '/guide',
+      name: 'TravelGuide',
+      component: () => import('@/views/TravelGuide.vue'),
+      meta: { title: '旅游攻略 - 湘西风情' },
+    },
+    {
+      path: '/heritage',
+      name: 'Heritage',
+      component: () => import('@/views/Heritage.vue'),
+      meta: { title: '非遗展示 - 湘西风情' },
+    },
+    {
+      path: '/guestbook',
+      name: 'Guestbook',
+      component: () => import('@/views/Guestbook.vue'),
+      meta: { title: '留言板 - 湘西风情' },
+    },
+    {
+      path: '/gallery',
+      name: 'Gallery',
+      component: () => import('@/views/Gallery.vue'),
+      meta: { title: '摄影画廊 - 湘西风情' },
     },
     {
       path: '/about',

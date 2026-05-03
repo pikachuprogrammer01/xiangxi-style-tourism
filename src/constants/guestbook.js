@@ -1,0 +1,42 @@
+export const mockMessages = [
+  {
+    id: 1,
+    username: '旅行者小王',
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=traveler1',
+    content: '上个月去了凤凰古城，沱江夜景真的太美了！这个网站让我提前做了很多功课，非常实用。',
+    time: '2026-04-28 14:30',
+    likes: 12,
+  },
+  {
+    id: 2,
+    username: '湘西本地人',
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=traveler2',
+    content: '作为湘西人，看到家乡的美景和文化被这么好地展示出来，真的很感动。欢迎大家来湘西玩！',
+    time: '2026-04-25 09:15',
+    likes: 28,
+  },
+  {
+    id: 3,
+    username: '美食猎人小李',
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=traveler3',
+    content: '血粑鸭真的绝了！还有米豆腐、姜糖，每一样都让人回味无穷。已经开始计划第二次湘西之行了。',
+    time: '2026-04-22 16:42',
+    likes: 8,
+  },
+  {
+    id: 4,
+    username: '摄影爱好者阿明',
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=traveler4',
+    content: '张家界的峰林太震撼了，随手一拍都是大片。建议大家早上早点去天子山，可以拍到云海！',
+    time: '2026-04-20 11:08',
+    likes: 15,
+  },
+  {
+    id: 5,
+    username: '文化探索者',
+    avatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=traveler5',
+    content: '苗族银饰锻制技艺太令人惊叹了！在凤凰古城亲眼看到银匠制作银饰，每一件都是艺术品。',
+    time: '2026-04-18 08:55',
+    likes: 20,
+  },
+]

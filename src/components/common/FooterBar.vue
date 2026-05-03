@@ -19,6 +19,11 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
           <ul class="footer-bar__nav-list">
             <li><RouterLink to="/attractions" class="footer-bar__link">景点总览</RouterLink></li>
             <li><RouterLink to="/foods" class="footer-bar__link">美食推荐</RouterLink></li>
+            <li><RouterLink to="/cultures" class="footer-bar__link">湘西文化</RouterLink></li>
+            <li><RouterLink to="/guide" class="footer-bar__link">旅游攻略</RouterLink></li>
+            <li><RouterLink to="/heritage" class="footer-bar__link">非遗展示</RouterLink></li>
+            <li><RouterLink to="/gallery" class="footer-bar__link">摄影画廊</RouterLink></li>
+            <li><RouterLink to="/guestbook" class="footer-bar__link">留言板</RouterLink></li>
             <li><RouterLink to="/about" class="footer-bar__link">关于我们</RouterLink></li>
             <li><RouterLink to="/profile" class="footer-bar__link">个人中心</RouterLink></li>
           </ul>
