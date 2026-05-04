@@ -1,477 +1,333 @@
-﻿毕业设计：基于 Vue + Element Plus 的湘西风情旅游宣传网站
+# 湘西风情 — 技术规格说明书（SPEC）
 
-# **技术规格说明书（SPEC）**
+## 1. 开发环境与依赖
 
-# **1. 开发环境配置**
+| 工具/库 | 版本 | 用途 |
+| :--- | :--- | :--- |
+| Node.js | ^20.19.0 \|\| >=22.12.0 | 运行环境 |
+| Vue | ^3.5.29 | 前端框架，Composition API + `<script setup>` |
+| Vite | ^7.3.1 | 构建工具，HMR 热更新 |
+| Element Plus | ^2.13.7 | UI 组件库 |
+| Vue Router | ^5.0.3 | 前端路由（history 模式） |
+| Pinia | ^3.0.4 | 状态管理 |
+| pinia-plugin-persistedstate | ^4.7.1 | Pinia localStorage 持久化 |
+| unplugin-auto-import | ^21.0.0 | Element Plus 自动导入 |
+| unplugin-vue-components | ^32.0.0 | Element Plus 组件按需导入 |
+| Prettier | 3.8.1 | 代码格式化（semi:false, singleQuote:true, printWidth:100） |
 
-| **工具/环境** | **版本要求** | **用途**                                            |
-| :------------ | :----------- | :-------------------------------------------------- |
-| VS Code       | 最新稳定版   | 代码编辑器，推荐插件：Volar、ESLint、Prettier       |
-| Node.js       | ≥18.0.0      | 运行环境                                            |
-| npm           |
-| Vite          | ^5.0.0       | 构建工具，提供极速HMR和优化打包                     |
-| Vue           | ^3.4.0       | 前端框架，使用Composition API + <script setup> 语法 |
-| Element Plus  | ^2.5.0       | UI组件库，按需引入（unplugin-vue-components）       |
-| Vue Router    | ^4.2.0       | 前端路由管理                                        |
-| Pinia         | ^2.1.0       | 状态管理（替代Vuex）                                |
+## 2. 项目目录结构
 
-# **2. 项目目录结构（详细版）**
-
+```
 xiangxi-style-tourism/
-├── public/ # 静态资源（不经过构建）
-│ ├── favicon.ico # 网站图标
-│ └── images/ # 无需处理的图片（如LOGO原始文件）
+├── public/                        # 静态资源（不经过构建）
+│   └── favicon.ico
 ├── src/
-│ ├── assets/ # 资源文件（会被构建工具处理）
-│ │ ├── images/ # 图片资源
-│ │ │ ├── logo.png # 网站LOGO（横版）
-│ │ │ ├── logo-square.png # 网站LOGO（方形）
-│ │ │ ├── attractions/ # 景点图片
-│ │ │ ├── foods/ # 美食图片
-│ │ │ ├── carousel/ # 轮播图
-│ │ │ └── icons/ # 自定义图标
-│ │ └── styles/ # 全局样式
-│ │ ├── main.css # 全局基础样式（在main.js引入）
-│ │ ├── variables.css # CSS变量（主题色、间距等）
-│ │ └── animations.css # 全局动画关键帧
-│ ├── components/ # 公共组件
-│ │ ├── common/ # 通用组件
-│ │ │ ├── HeaderNav.vue # 顶部导航栏
-│ │ │ ├── FooterBar.vue # 底部页脚
-│ │ │ ├── BreadcrumbNav.vue # 面包屑导航
-│ │ │ ├── BackToTop.vue # 返回顶部（封装el-backtop）
-│ │ │ ├── LoadingSkeleton.vue # 加载骨架屏
-│ │ │ └── EmptyState.vue # 空状态组件
-│ │ ├── home/ # 首页专用组件
-│ │ │ ├── HeroCarousel.vue # 轮播图组件
-│ │ │ ├── HotRecommend.vue # 热点推荐
-│ │ │ ├── CultureHighlights.vue# 文化特色
-│ │ │ └── FoodPreview.vue # 美食速览
-│ │ ├── attraction/ # 景点模块组件
-│ │ │ ├── AttractionCard.vue # 景点卡片
-│ │ │ ├── AttractionSidebar.vue# 景点侧边栏
-│ │ │ └── AttractionTabs.vue # 景点详情Tab
-│ │ ├── food/ # 美食模块组件
-│ │ │ ├── FoodCard.vue # 美食卡片
-│ │ │ └── FoodSidebar.vue # 美食详情侧边栏
-│ │ └── user/ # 用户模块组件
-│ │ ├── UserProfileCard.vue # 用户信息卡片
-│ │ ├── UserStats.vue # 用户统计
-│ │ └── FavoriteList.vue # 收藏列表
-│ ├── views/ # 页面级组件（对应路由）
-│ │ ├── Home.vue # 首页
-│ │ ├── Login.vue # 登录页
-│ │ ├── Register.vue # 注册页
-│ │ ├── Attractions.vue # 景点总览页
-│ │ ├── AttractionDetail.vue # 景点详情页（动态路由）
-│ │ ├── Foods.vue # 美食推荐页
-│ │ ├── FoodDetail.vue # 美食详情页（动态路由）
-│ │ ├── Profile.vue # 个人中心
-│ │ └── About.vue # 关于我们
-│ ├── router/ # 路由配置
-│ │ └── index.js # 路由表定义，路由守卫
-│ ├── stores/ # Pinia状态管理
-│ │ ├── user.js # 用户状态（登录信息、收藏）
-│ │ ├── attraction.js # 景点状态
-│ │ └── food.js # 美食状态
-│ ├── composables/ # 组合式函数（逻辑复用）
-│ │ ├── useAuth.js # 认证逻辑
-│ │ ├── useFavorites.js # 收藏逻辑
-│ │ ├── useScroll.js # 滚动相关逻辑
-│ │ └── useResponsive.js # 响应式断点检测
-│ ├── utils/ # 工具函数
-│ │ ├── request.js # 封装请求（模拟API）
-│ │ ├── validators.js # 表单验证规则
-│ │ ├── formatters.js # 数据格式化（日期、价格等）
-│ │ └── storage.js # localStorage封装
-│ ├── constants/ # 常量定义
-│ │ ├── index.js # 通用常量
-│ │ ├── attractions.js # 景点常量数据
-│ │ ├── foods.js # 美食常量数据
-│ │ └── mockData.js # 模拟数据总入口
-│ ├── App.vue # 根组件
-│ └── main.js # 入口文件（引入全局样式、注册插件）
-├── index.html # HTML模板
-├── vite.config.js # Vite配置（别名、插件、代理）
-├── package.json # 依赖管理
-└── README.md # 项目说明文档
+│   ├── assets/
+│   │   ├── images/                # 图片资源
+│   │   │   ├── logo.png
+│   │   │   ├── attractions/       # 景点图片
+│   │   │   ├── foods/             # 美食图片
+│   │   │   ├── carousel/          # 轮播图
+│   │   │   └── icons/             # 自定义图标
+│   │   └── styles/
+│   │       ├── main.css           # 全局基础样式（main.js 引入）
+│   │       ├── variables.css      # CSS 变量（主题色、间距、断点）
+│   │       └── animations.css     # 全局动画关键帧
+│   ├── components/
+│   │   ├── common/                # 通用组件
+│   │   │   ├── HeaderNav.vue      # 顶部导航栏
+│   │   │   ├── FooterBar.vue      # 底部页脚
+│   │   │   ├── BreadcrumbNav.vue  # 面包屑导航
+│   │   │   ├── BackToTop.vue      # 返回顶部
+│   │   │   ├── LoadingSkeleton.vue # 加载骨架屏
+│   │   │   └── EmptyState.vue     # 空状态组件
+│   │   ├── home/                  # 首页专用组件
+│   │   │   ├── HeroCarousel.vue   # 轮播图
+│   │   │   ├── HotRecommend.vue   # 热门推荐
+│   │   │   └── FoodPreview.vue    # 美食速览
+│   │   ├── attraction/            # 景点模块组件
+│   │   │   ├── AttractionCard.vue  # 景点卡片
+│   │   │   ├── AttractionSidebar.vue # 景点侧边栏
+│   │   │   └── AttractionTabs.vue  # 景点详情 Tab
+│   │   ├── food/                  # 美食模块组件
+│   │   │   ├── FoodCard.vue       # 美食卡片
+│   │   │   └── FoodSidebar.vue    # 美食详情侧边栏
+│   │   └── user/                  # 用户模块组件
+│   │       ├── UserProfileCard.vue # 用户信息卡片
+│   │       ├── UserStats.vue      # 用户统计
+│   │       └── FavoriteList.vue   # 收藏列表
+│   ├── views/                     # 页面级组件（15 个）
+│   │   ├── Home.vue               # 首页
+│   │   ├── Login.vue              # 登录页
+│   │   ├── Register.vue           # 注册页
+│   │   ├── Attractions.vue        # 景点总览
+│   │   ├── AttractionDetail.vue   # 景点详情（动态路由）
+│   │   ├── Foods.vue              # 美食推荐
+│   │   ├── FoodDetail.vue         # 美食详情（动态路由）
+│   │   ├── TravelGuide.vue        # 旅游攻略
+│   │   ├── Heritage.vue           # 非遗展示
+│   │   ├── HeritageDetail.vue     # 非遗详情（动态路由）
+│   │   ├── Gallery.vue            # 摄影画廊
+│   │   ├── Guestbook.vue          # 留言板
+│   │   ├── Profile.vue            # 个人中心
+│   │   ├── About.vue              # 关于我们
+│   │   └── NotFound.vue           # 404 页面
+│   ├── router/
+│   │   └── index.js               # 路由表 + 全局守卫
+│   ├── stores/
+│   │   └── user.js                # 用户状态（登录、收藏、历史）
+│   ├── constants/                 # 常量与 Mock 数据
+│   │   ├── index.js               # 通用常量
+│   │   ├── attractions.js         # 景点数据
+│   │   ├── foods.js               # 美食数据
+│   │   ├── heritage.js            # 非遗数据
+│   │   ├── guide.js               # 旅游攻略数据
+│   │   ├── gallery.js             # 摄影画廊数据
+│   │   ├── guestbook.js           # 留言板模拟数据
+│   │   └── mockData.js            # 数据总入口
+│   ├── utils/
+│   │   ├── request.js             # 模拟 API 请求
+│   │   ├── validators.js          # 表单验证规则
+│   │   ├── formatters.js          # 数据格式化
+│   │   └── storage.js             # localStorage 封装（用户隔离）
+│   ├── App.vue                    # 根组件：<RouterView />
+│   └── main.js                    # 入口：createApp → pinia → router → mount
+├── index.html
+├── vite.config.js
+├── package.json
+└── CLAUDE.md
+```
 
-# **3. 五种布局实现方案（详细技术说明）**
+## 3. 五种 CSS+DIV 布局实现
 
-## **布局1：Banner全宽布局（首页Hero区）**
+### 布局 1：Banner 全宽布局
 
-**技术要点：**
+**应用页面**：首页 Hero 区、各页面顶部 Hero 区、非遗详情封面
 
+```css
 .hero-section {
-`  `width: 100vw; /\* 视口全宽 \*/
-`  `height: 70vh; /\* 视口高度的70% \*/
-`  `position: relative;
-`  `overflow: hidden;
+  width: 100vw;
+  height: 70vh;          /* 移动端 50vh */
+  position: relative;
+  overflow: hidden;
 }
-
 .hero-image {
-`  `width: 100%;
-`  `height: 100%;
-`  `object-fit: cover; /\* 图片填充，保持比例 \*/
-`  `object-position: center; /\* 居中裁剪 \*/
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
+```
 
-**应用场景：**
+### 布局 2：侧边栏布局（Flexbox）
 
-首页轮播图、页面顶部大图
+**应用页面**：景点总览、景点详情、关于我们
 
-## **布局2：圣杯布局/侧边栏布局（景点总览、详情页）**
-
-**技术要点：Flexbox实现**
-
+```css
 .layout-container {
-`  `display: flex;
-`  `min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
 }
-
 .sidebar {
-`  `width: 200px; /\* 固定宽度 \*/
-`  `flex-shrink: 0; /\* 不收缩 \*/
-`  `background: #f5f5f5;
+  width: 200px;           /* 固定宽度 */
+  flex-shrink: 0;         /* 不收缩 */
 }
-
 .main-content {
-`  `flex: 1; /\* 占据剩余空间 \*/
-`  `padding: 24px;
-`  `overflow-y: auto;
+  flex: 1;                /* 占据剩余空间 */
+  padding: 24px;
 }
-
-/\* 移动端适配 \*/
+/* 移动端：flex-direction: column，侧边栏移到底部 */
 @media (max-width: 768px) {
-.layout-container {
-`    `flex-direction: column;
-`  `}
-.sidebar {
-`    `width: 100%;
-`    `order: 2; /\* 移动端侧边栏移到底部 \*/
-`  `}
+  .layout-container { flex-direction: column; }
+  .sidebar { width: 100%; order: 2; }
 }
+```
 
-**应用场景：**
+### 布局 3：响应式网格布局（CSS Grid）
 
-景点总览页、景点详情页、关于我们页
+**应用页面**：美食推荐、非遗展示、摄影画廊
 
-## **布局3：响应式网格布局（美食推荐页）**
-
-**技术要点：CSS Grid**
-
-.food-grid {
-`  `display: grid;
-`  `grid-template-columns: repeat(4, 1fr); /\* 桌面端4列 \*/
-`  `gap: 24px;
-`  `padding: 24px;
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* 桌面 4 列 */
+  gap: 24px;
 }
-
-/\* 响应式断点 \*/
 @media (max-width: 1200px) {
-.food-grid {
-`    `grid-template-columns: repeat(3, 1fr); /\* 平板3列 \*/
-`  `}
+  .grid-container { grid-template-columns: repeat(3, 1fr); } /* 平板 3 列 */
 }
-
 @media (max-width: 768px) {
-.food-grid {
-`    `grid-template-columns: repeat(2, 1fr); /\* 手机2列 \*/
-`  `}
+  .grid-container { grid-template-columns: repeat(2, 1fr); } /* 手机 2 列 */
 }
+```
 
-**替代方案：**
+### 布局 4：Flex 居中布局
 
-使用Element Plus的<el-row :gutter="24"> + <el-col :xs="12" :sm="8" :md="6">
+**应用页面**：登录页、注册页、404 页
 
-**应用场景：**
-
-美食推荐页、景点卡片列表、首页热点推荐
-
-## **布局4：Flex居中布局（登录/注册页）**
-
-**技术要点：Flexbox完美居中**
-
+```css
 .auth-page {
-`  `display: flex;
-`  `justify-content: center; /\* 水平居中 \*/
-`  `align-items: center; /\* 垂直居中 \*/
-`  `min-height: 100vh; /\* 全屏高度 \*/
-`  `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
-
 .auth-card {
-`  `width: 100%;
-`  `max-width: 400px; /\* 最大宽度限制 \*/
-`  `padding: 40px;
-`  `background: white;
-`  `border-radius: 12px;
-`  `box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;       /* 注册页 450px */
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
+```
 
-**应用场景：**
+### 布局 5：仪表盘布局（CSS Grid + Card）
 
-登录页、注册页、404错误页
+**应用页面**：个人中心
 
-## **布局5：仪表盘布局（个人中心）**
-
-**技术要点：CSS Grid + Card分区**
-
+```css
 .dashboard {
-`  `display: grid;
-`  `grid-template-columns: 280px 1fr; /\* 左侧固定，右侧自适应 \*/
-`  `gap: 24px;
-`  `padding: 24px;
+  display: grid;
+  grid-template-columns: 280px 1fr;  /* 左侧固定，右侧自适应 */
+  gap: 24px;
+  padding: 24px;
 }
-
 .stats-row {
-`  `display: grid;
-`  `grid-template-columns: repeat(4, 1fr);
-`  `gap: 16px;
-`  `margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
 }
-
 .stat-card {
-`  `background: white;
-`  `padding: 20px;
-`  `border-radius: 8px;
-`  `box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
+```
 
-**应用场景：**
+## 4. CSS 样式组织规范
 
-个人中心、后台管理界面（如有）
+| 层级 | 存放位置 | 作用范围 | 说明 |
+| :--- | :--- | :--- | :--- |
+| 全局基础样式 | `src/assets/styles/main.css` | 全站 | reset、工具类、字体定义 |
+| CSS 变量 | `src/assets/styles/variables.css` | 全站 | 主题色、间距、断点 |
+| 组件局部样式 | `<style scoped>` | 当前组件 | BEM 命名，避免样式污染 |
+| 动画关键帧 | `src/assets/styles/animations.css` | 全站 | `@keyframes` 复用定义 |
 
-# **4. CSS+DIV代码分离规范（严格执行）**
+**命名规范**：BEM 命名法 `.block__element--modifier`，组件根类名为组件 kebab-case 名。
 
-## **4.1 样式组织原则**
+## 5. 路由设计
 
-| **层级**     | **存放位置**                     | **作用范围** | **说明**                       |
-| :----------- | :------------------------------- | :----------- | :----------------------------- |
-| 全局基础样式 | src/assets/styles/main.css       | 全站         | 重置样式、通用工具类、字体定义 |
-| CSS变量      | src/assets/styles/variables.css  | 全站         | 主题色、间距、断点等变量       |
-| 组件局部样式 | <style scoped>                   | 当前组件     | 组件特有样式，避免污染         |
-| 动画关键帧   | src/assets/styles/animations.css | 全站         | 复用动画定义                   |
+| 路由 | 视图组件 | 需登录 | meta |
+| :--- | :--- | :--- | :--- |
+| `/` | Home.vue | 否 | `{ title: '首页 - 湘西风情' }` |
+| `/login` | Login.vue | 否（已登录跳转 `/`） | `{ title: '登录 - 湘西风情', guest: true }` |
+| `/register` | Register.vue | 否（已登录跳转 `/`） | `{ title: '注册 - 湘西风情', guest: true }` |
+| `/attractions` | Attractions.vue | 否 | `{ title: '景点总览 - 湘西风情' }` |
+| `/attraction/:id` | AttractionDetail.vue | 否 | 动态路由，title 动态设置 |
+| `/foods` | Foods.vue | 否 | `{ title: '美食推荐 - 湘西风情' }` |
+| `/food/:id` | FoodDetail.vue | 否 | 动态路由，title 动态设置 |
+| `/guide` | TravelGuide.vue | 否 | `{ title: '旅游攻略 - 湘西风情' }` |
+| `/heritage` | Heritage.vue | 否 | `{ title: '非遗展示 - 湘西风情' }` |
+| `/heritage/:id` | HeritageDetail.vue | 否 | 动态路由，title 动态设置 |
+| `/gallery` | Gallery.vue | 否 | `{ title: '摄影画廊 - 湘西风情' }` |
+| `/guestbook` | Guestbook.vue | 否 | `{ title: '留言板 - 湘西风情' }` |
+| `/profile` | Profile.vue | **是**（未登录跳转 `/login?redirect=...`） | `{ title: '个人中心 - 湘西风情', requiresAuth: true }` |
+| `/about` | About.vue | 否 | `{ title: '关于我们 - 湘西风情' }` |
+| `/:pathMatch(.*)*` | NotFound.vue | 否 | `{ title: '页面未找到 - 湘西风情' }` |
 
-## **4.2 命名规范**
+### 路由守卫
 
-- BEM命名法：.block\_\_element--modifier
-- 示例：.attraction-card\_\_title--highlighted
-- Vue组件类名：与组件名保持一致，使用kebab-case
-- 示例：组件AttractionCard.vue → 根类.attraction-card
+- `beforeEach` 全局前置守卫：设置 `document.title`
+- `meta.requiresAuth === true` 且未登录 → 重定向到 `/login?redirect=<原路径>`
+- `meta.guest === true` 且已登录 → 重定向到 `/`
+- 所有路由懒加载（动态 `import()`）
+- `scrollBehavior`：切换路由后滚动到顶部
 
-## **4.3 样式隔离示例**
+## 6. 数据架构
 
-<!-- AttractionCard.vue -->
-<template>
-`  `<div class="attraction-card">
-`    `<img class="attraction-card\_\_image" :src="image" />
-`    `<div class="attraction-card\_\_content">
-`      `<h3 class="attraction-card\_\_title">{{ name }}</h3>
-`      `<p class="attraction-card\_\_desc">{{ description }}</p>
-`    `</div>
-`  `</div>
-</template>
+### 6.1 Mock 数据组织
 
-<style scoped>
-.attraction-card {
-`  `border-radius: 8px;
-`  `overflow: hidden;
-`  `transition: transform 0.3s ease;
-}
+纯前端项目，所有数据以 JavaScript 常量形式存放在 `src/constants/` 下，通过 `v-for` 渲染。
 
-.attraction-card:hover {
-`  `transform: translateY(-4px);
-}
+| 数据文件 | 导出 | 主要字段 |
+| :--- | :--- | :--- |
+| `attractions.js` | `attractions` 数组 | id, name, category, tags, rating, price, location, coverImage, images[], description, details{}, reviews[] |
+| `foods.js` | `foods` 数组 | id, name, category, tags, flavor[], heat, popularity, coverImage, images[], story, ingredients[], steps[], nutrition{}, shops[] |
+| `heritage.js` | `heritageItems` 数组 + `HERITAGE_CATEGORY_MAP` | id, name, category, level, year, image, description, origin, features, status, value |
+| `guide.js` | `seasons` 数组 + `routePlans` 数组 + `travelTips` 对象 | 季节名/描述、路线标题/天数/日程、分类贴士 |
+| `gallery.js` | `galleryPhotos` 数组 + `GALLERY_CATEGORIES` | id, src, title, author, category |
+| `guestbook.js` | `mockMessages` 数组 | id, username, avatar, content, time, likes |
 
-.attraction-card\_\_image {
-`  `width: 100%;
-`  `aspect-ratio: 16/9;
-`  `object-fit: cover;
-}
-</style>
+### 6.2 Pinia 状态管理（user.js）
 
-# **5. 数据展示方案（Mock数据设计）**
+```
+useUserStore（Composition API 风格）
+├── state
+│   ├── isLoggedIn: boolean
+│   ├── userInfo: { id, username, email, phone, createdAt } | null
+│   ├── favorites: { attractions: number[], foods: number[] }
+│   └── history: { id, type, name, image, time }[]
+├── actions
+│   ├── init()                  — 从 localStorage 恢复登录态
+│   ├── login(username, password) → boolean
+│   ├── register(userData) → { success, message }
+│   ├── logout()                — 清除状态 + localStorage
+│   ├── toggleFavorite(type, id)
+│   ├── isFavorite(type, id) → boolean
+│   ├── addToHistory(item)      — 去重 + 最大 50 条
+│   └── clearHistory()
+└── 持久化
+    └── localStorage（按用户 ID 隔离 key）
+```
 
-## **5.1 数据架构**
+### 6.3 用户数据隔离
 
-由于本毕设为纯前端项目，采用JSON模拟数据，通过Vue的v-for指令渲染。
+收藏和历史记录按用户 ID 存储在不同的 localStorage key 中：
+- `favorites_<userId>` — 用户收藏数据
+- `history_<userId>` — 用户浏览历史
+- `currentUser` — 当前登录用户信息
+- `users` — 所有注册用户列表
 
-## **数据文件组织：**
+不同用户登录后看到的收藏和历史记录完全隔离。
 
-- src/constants/mockData.js：数据总入口，导出所有模拟数据
-- src/constants/attractions.js：景点数据
-- src/constants/foods.js：美食数据
-- src/constants/users.js：用户模拟数据
+### 6.4 演示账号
 
-## **5.2 景点数据结构设计**
+首次启动自动初始化：用户名 `test`，密码 `abc123`。
 
-// attractions.js 示例结构
-export const attractions = [
-`  `{
-`    `id: 1,
-`    `name: "凤凰古城",
-`    `category: "history", // 分类：history/nature/ethnic/red
-`    `tags: ["4A景区", "历史古镇", "夜景"],
-`    `rating: 4.8,
-`    `price: 148, // 门票价格，0表示免费
-`    `location: "湘西土家族苗族自治州凤凰县",
-`    `coverImage: "/images/attractions/fenghuang-cover.jpg",
-`    `images: ["...", "...", "..."], // 详情页图集
-`    `description: "凤凰古城始建于清康熙年间...", // 简介
-`    `details: {
-`      `openTime: "全天开放（内部景点8:00-17:30）",
-`      `duration: "建议1-2天",
-`      `bestSeason: "3-5月、9-11月",
-`      `traffic: "吉首火车站转大巴，约1小时..."
-`    `},
-`    `reviews: [
-` `{
-` `id: 1,
-` `user: "旅行达人小王",
-` `avatar: "/images/avatars/user1.jpg",
-` `rating: 5,
-` `date: "2024-03-15",
-` `content: "夜景真的太美了，强烈推荐住一晚..."
-` `}
-` `]
-`  `}
-`  `// ... 更多景点
-];
+## 7. 组件复用关系
 
-## **5.3 美食数据结构设计**
+| 组件 | 复用位置 | 关键 Props |
+| :--- | :--- | :--- |
+| HeaderNav | 所有页面 | —（自动根据路由高亮，已登录显示头像下拉菜单） |
+| FooterBar | 所有页面 | — |
+| BreadcrumbNav | 详情页 | `items: { name, path }[]` |
+| AttractionCard | 首页热门推荐、景点总览、相关推荐、收藏列表 | `data: attraction 对象` |
+| FoodCard | 首页美食速览、美食推荐、相关推荐、收藏列表 | `data: food 对象` |
+| EmptyState | 收藏页、搜索结果页 | `image, title, description` |
+| LoadingSkeleton | 列表加载中 | `rows, type` |
+| BackToTop | 各内容页 | —（封装 el-backtop） |
+| AttractionSidebar | 景点详情 | `attraction 对象` |
+| AttractionTabs | 景点详情 | `attraction 对象` |
+| FoodSidebar | 美食详情 | `food 对象` |
+| UserProfileCard | 个人中心 | —（从 store 读取） |
+| UserStats | 个人中心 | —（从 store 读取） |
+| FavoriteList | 个人中心 | `type: 'attractions' \| 'foods'` |
 
-// foods.js 示例结构
-export const foods = [
-`  `{
-`    `id: 1,
-`    `name: "湘西腊肉",
-`    `category: "main", // 分类：main/snack/drink/festival
-`    `tags: ["土家族", "传统名菜", "咸香"],
-`    `flavor: ["咸", "香"], // 口味标签
-`    `heat: 3, // 辣度 0-5
-`    `popularity: 9856, // 推荐人数
-`    `coverImage: "/images/foods/larou-cover.jpg",
-`    `images: ["...", "..."],
-`    `story: "湘西腊肉是土家族的传统美食，已有千年历史...",
-`    `ingredients: ["五花肉", "食盐", "花椒", "白酒"],
-`    `steps: [
-` `"选用新鲜五花肉，切成长条...",
-` `"用食盐、花椒腌制7天...",
-` `"悬挂于火塘上方，烟熏30天..."
-` `],
-`    `nutrition: {
-`      `calories: "320千卡/100g",
-`      `protein: "18g",
-`      `fat: "28g"
-`    `},
-`    `shops: [
-` `{
-` `name: "古城腊肉坊",
-` `address: "凤凰古城东正街12号",
-` `avgPrice: 45
-` `}
-` `]
-`  `}
-`  `// ... 更多美食
-];
+## 8. 自查清单
 
-## **5.4 用户状态设计（Pinia）**
-
-// stores/user.js
-export const useUserStore = defineStore('user', {
-`  `state: () => ({
-`    `isLoggedIn: false,
-`    `userInfo: null,
-`    `favorites: {
-`      `attractions: [], // 收藏的景点ID数组
-`      `foods: [] // 收藏的美食ID数组
-`    `},
-`    `history: [] // 浏览历史
-`  `}),
-
-`  `actions: {
-`    `login(userData) { ... },
-`    `logout() { ... },
-`    `toggleFavorite(type, id) { ... },
-`    `addToHistory(item) { ... }
-`  `},
-
-`  `persist: true // 使用pinia-plugin-persistedstate持久化到localStorage
-});
-
-# **6. 路由设计**
-
-| **路由路径**    | **组件**             | **是否需要登录**       | **页面标题**        |
-| :-------------- | :------------------- | :--------------------- | :------------------ |
-| /               | Home.vue             | 否                     | 首页 - 湘西风情     |
-| /login          | Login.vue            | 否（已登录跳转首页）   | 登录 - 湘西风情     |
-| /register       | Register.vue         | 否（已登录跳转首页）   | 注册 - 湘西风情     |
-| /attractions    | Attractions.vue      | 否                     | 景点总览 - 湘西风情 |
-| /attraction/:id | AttractionDetail.vue | 否                     | {{name}} - 湘西风情 |
-| /foods          | Foods.vue            | 否                     | 美食推荐 - 湘西风情 |
-| /food/:id       | FoodDetail.vue       | 否                     | {{name}} - 湘西风情 |
-| /profile        | Profile.vue          | 是（未登录跳转登录页） | 个人中心 - 湘西风情 |
-| /about          | About.vue            | 否                     | 关于我们 - 湘西风情 |
-| \*              | 404页面              | 否                     | 页面未找到          |
-
-## **路由守卫逻辑：**
-
-- 全局前置守卫检查to.meta.requiresAuth
-- 需要登录的页面未登录时，跳转登录页并携带redirect参数
-
-# **7. 组件复用策略**
-
-| **组件名称**   | **复用位置**             | **可配置Props**             |
-| :------------- | :----------------------- | :-------------------------- |
-| HeaderNav      | 所有页面                 | transparent（首页透明背景） |
-| FooterBar      | 所有页面                 | 无                          |
-| BreadcrumbNav  | 详情页、总览页           | items（面包屑数组）         |
-| AttractionCard | 首页、景点总览、相关推荐 | data（景点数据对象）        |
-| FoodCard       | 首页、美食推荐、相关推荐 | data（美食数据对象）        |
-| EmptyState     | 收藏页、搜索结果页       | image, title, description   |
-
-# **8. 项目进度与自查表（答辩准备）**
-
-## **8.1 自查清单**
-
-| **检查项** | **状态** | **验收标准**                                      | **备注**                                   |
-| :--------- | :------- | :------------------------------------------------ | :----------------------------------------- |
-| LOGO设计   | 待完成   | 使用PS设计，PNG格式，融入湘西元素，提供横版/方形  | 需体现地方特色                             |
-| 页面数量   | 待完成   | 共12个页面，每个页面内容充实，不重复              | 包含首页、3个景点详情、3个美食详情         |
-| 布局规范   | 待完成   | 5种CSS+DIV布局全部使用，代码分离规范              | Banner全宽、侧边栏、网格、Flex居中、仪表盘 |
-| 动效实现   | 待完成   | 至少3种动效：轮播图、返回顶部、表单校验、卡片悬停 | 使用Element Plus组件+自定义CSS             |
-| 响应式设计 | 待完成   | 适配桌面端、平板端、移动端三种设备                | 使用媒体查询+Element Plus响应式栅格        |
-| 代码规范   | 待完成   | 样式与结构分离，组件化开发，命名规范              | <style scoped> + BEM命名                   |
-| 数据模拟   | 待完成   | JSON数据充实，每个景点/美食有完整信息             | 使用v-for渲染，数据量充足                  |
-| 交互功能   | 待完成   | 登录注册、收藏、浏览历史、表单验证                | 使用Pinia管理状态，localStorage持久化      |
-| 积极向上   | 满足     | 内容聚焦湘西地方文化，传播正能量                  | 展示自然风光、民俗文化、传统美食           |
-| 文档完整   | 待完成   | 项目README、代码注释、设计说明                    | 便于答辩展示                               |
-
-## **8.2 建议开发顺序**
-
-1\. 第一阶段（基础搭建）：项目初始化、目录结构、全局样式、路由配置
-
-2\. 第二阶段（页面骨架）：按模块顺序开发12个页面的基础布局和静态内容
-
-3\. 第三阶段（数据接入）：编写Mock数据，使用v-for渲染动态内容
-
-4\. 第四阶段（交互实现）：登录状态、收藏功能、表单验证、路由守卫
-
-5\. 第五阶段（动效优化）：轮播图、过渡动画、悬停效果、响应式适配
-
-6\. 第六阶段（细节打磨）：空状态、加载状态、错误处理、代码注释
-
-7\. 第七阶段（答辩准备）：整理文档、准备演示数据、检查清单验收
-
-# **附录：设计素材清单**
-
-| **素材类型** | **数量** | **要求**               | **来源建议**                  |
-| :----------- | :------- | :--------------------- | :---------------------------- |
-| 网站LOGO     | 2张      | 横版+方形，PNG透明背景 | Photoshop自行设计             |
-| 首页轮播图   | 4-5张    | 1920×1080，高清风景照  | Unsplash、Pixabay（免费商用） |
-| 景点封面图   | 6张+     | 1200×800，构图精美     | 同上                          |
-| 景点详情图   | 15张+    | 展示不同角度和季节     | 同上                          |
-| 美食图片     | 10张+    | 特写+场景，诱人食欲    | 同上                          |
-| 用户头像     | 5-8张    | 用于模拟评论           | 随机头像API或默认头像         |
-| 图标素材     | 若干     | 统一风格线性图标       | Element Plus图标库            |
+| 检查项 | 验收标准 |
+| :--- | :--- |
+| 页面数量 | 15 个页面，内容充实，不重复 |
+| 5 种布局 | Banner 全宽、侧边栏、Grid 网格、Flex 居中、仪表盘全部使用 |
+| 3+ 动效 | 轮播图、返回顶部、卡片悬停、图片放大、骨架屏、灯箱预览 |
+| 响应式 | 桌面/平板/移动端三档适配，媒体查询 + Element Plus 响应式栅格 |
+| CSS 规范 | `<style scoped>` + BEM 命名，样式与结构分离 |
+| Mock 数据 | 6 个数据模块，JSON 结构完整，`v-for` 动态渲染 |
+| 交互功能 | 登录/注册/收藏/历史/留言板/搜索/筛选/分页 |
+| 用户隔离 | 不同用户收藏和历史记录独立存储 |
+| 路由守卫 | 需登录页面保护，已登录跳转首页 |
+| 路由懒加载 | 全部路由使用动态 `import()` |
