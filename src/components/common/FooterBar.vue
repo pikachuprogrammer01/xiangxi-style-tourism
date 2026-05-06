@@ -13,7 +13,6 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
           </p>
         </div>
 
-
         <div class="footer-bar__col">
           <h4 class="footer-bar__col-title">联系方式</h4>
           <ul class="footer-bar__contact-list">
@@ -44,7 +43,7 @@ import { Message, Phone, Location } from '@element-plus/icons-vue'
     </div>
 
     <div class="footer-bar__bottom">
-      <p>&copy; 2026 湘西风情 秦欢 版权所有</p>
+      <p>&copy; 2026 湘西风情 秦欢 5222330523 版权所有</p>
     </div>
   </footer>
 </template>
